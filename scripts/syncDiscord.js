@@ -77,7 +77,10 @@ async function runDiscordSync() {
     console.log(`Checking ${finalWeapons.length} grouped weapons to sync to Discord...`);
 
     console.log("Starting Puppeteer engine for Image Generation...");
-    const browser = await puppeteer.launch({ headless: 'new' });
+    const browser = await puppeteer.launch({ 
+        headless: 'new',
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
     const page = await browser.newPage();
     // Vastly increased width to avoid clipping the 5 columns, high deviceScaleFactor for crispness!
     await page.setViewport({ width: 1250, height: 3000, deviceScaleFactor: 2 }); 
@@ -347,11 +350,7 @@ async function runDiscordSync() {
             console.error("Fetch Network Error:", err);
         }
         
-        // Limit to 5 during dev so we don't accidentally bomb the server 
-        if((postedCount + patchedCount) >= 5 && process.env.DISCORD_POST_LIMIT !== 'all') {
-            console.log("\n[DEV LIMIT REACHED] Stopping after 5 Test Posts/Patches.");
-            break;
-        }
+// No limit for production sync! All weapons will be processed.
     }
 
     await browser.close();

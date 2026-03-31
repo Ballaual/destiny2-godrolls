@@ -29,26 +29,27 @@ Damit die Action die Daten von Bungie abrufen kann, musst du in deinem GitHub Re
 
 Das Skript `npm run sync` pusht dann automatisch einen unsichtbaren Commit in dein Repository, der die Live-Webseite (GitHub Pages) updatet!
 
-## 3. n8n Einbindung (Discord Bilder-Posten)
+## 3. Discord Foren-Automatisierung (Infografiken via GitHub Actions)
 
-Der letzte, wichtigste Schritt: Wie kriegst du n8n dazu, die schweren `Puppeteer` Discord-Bilder zu rendern und in dein Forum zu schießen? 
+Wir nutzen **GitHub Actions**, um hochauflösende Infografiken deiner God Rolls im Glassmorphism-Design zu rendern und vollautomatisch in dein Discord-Forum zu posten. 
 
-Da dein Manifest nun durch GitHub immer aktuell gehalten wird, beschränkt sich die Aufgabe deines lokalen n8n-Servers auf das Abgleichen und Posten!
+Das Rendering (Puppeteer/Chrome) findet direkt auf den GitHub-Servern statt. Dein lokales System oder n8n werden dafür **nicht** benötigt.
 
-### n8n Workflow-Aufbau:
+### Funktionsweise:
+1. **Wöchentlicher Sync:** Jeden Dienstag um 20:00 UTC (kurz nach dem Bungie-Reset) startet der Workflow.
+2. **Datenabgleich:** Das Skript prüft, ob es neue God Rolls gibt oder ob sich Perks geändert haben (MD5-Hashing).
+3. **Rendering:** Puppeteer erstellt ein 1200px breites PNG-Bild für jede Waffe (Deutsch & Englisch).
+4. **Discord Post:** Die Bilder werden per Webhook an dein Discord-Forum gesendet. Bestehende Threads werden aktualisiert (**PATCH**), neue Waffen erhalten einen eigenen Thread (**POST**).
+5. **Status-Speicherung:** Die Datei `scripts/discordState.json` wird nach jedem Lauf automatisch aktualisiert, damit keine doppelten Posts entstehen.
 
-1. **Trigger Node (Cronjob):**
-   - Wähle den Token `Schedule Trigger`.
-   - Setze die Frequenz (z. B. 1x wöchentlich am Dienstag um 19:50 Uhr – kurz *nachdem* Git das Update gemacht hat).
+### Setup für die Discord-Synchronisierung:
+Zusätzlich zu den oben genannten Schritten musst du ein weiteres Secret in GitHub anlegen:
+1. Gehe zu **Settings -> Secrets and variables -> Actions**.
+2. Erstelle ein neues Secret:
+   - `DISCORD_WEBHOOK_URL` (Die Webhook-URL deines Discord-Forum-Channels).
 
-2. **Execute Command Node (Repository Clonen/Pullen):**
-   - Damit n8n die nagelneue `destinyData.json` aus GitHub hat, musst du das Projektverzeichnis aktualisieren.
-   - Command: `git pull origin main` (Wenn dein Projekt bereits im Container-Dateisystem liegt) 
-   - *Tipp:* Wenn n8n absolut keinen Zugriff auf Git hat, kannst du alternativ die generierte `.json` über n8n via HTTP-Node herunterladen.
-
-3. **Execute Command Node (Discord Synchronisierung):**
-   - Verbinde den Erfolgs-Output (Success) vom vorherigen Command.
-   - Command: `npm run discord-sync`
-   - **Tipp für die `.env` / Sicherheit:** Anstatt Keys im Code stehen zu haben, übergib dem n8n-Container in seiner Server-Umgebung (Docker) einfach die `.env` Variablen (`DISCORD_WEBHOOK_URL`, `LITTLELIGHT_URL`). Das Puppeteer-Skript greift automatisch darauf zu!
-
-Das Skript vergleicht dann leise die MD5-Hashes in der `discordState.json` und schickt ausschließlich neue oder veränderte XXL-Bilder in atemberaubender Glassmorphism-Optik über deinen Webhook ans Forum (als **PATCH** zu alten Threads, oder als neue Posts!).
+### Manueller Start:
+Du kannst den Sync jederzeit manuell anstoßen:
+1. Klicke im Repository auf den Tab **Actions**.
+2. Wähle links **"Discord Sync (Infographics)"**.
+3. Klicke auf den Button **"Run workflow"**.

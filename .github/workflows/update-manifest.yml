@@ -26,7 +26,7 @@ jobs:
       - name: Run Manifest Update Script
         env:
           BUNGIE_API_KEY: ${{ secrets.BUNGIE_API_KEY }}
-          LITTLELIGHT_URL: ${{ secrets.LITTLELIGHT_URL }}
+          GODROLL_DATABASE_URL: ${{ secrets.GODROLL_DATABASE_URL }}
         run: npm run sync
 
       - name: Commit and Push Changes

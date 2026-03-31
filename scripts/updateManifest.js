@@ -11,8 +11,8 @@ const __dirname = path.dirname(__filename);
 const BUNGIE_API_KEY = process.env.BUNGIE_API_KEY;
 if (!BUNGIE_API_KEY) throw new Error("Missing BUNGIE_API_KEY in .env");
 
-const LITTLELIGHT_URL = process.env.LITTLELIGHT_URL;
-if (!LITTLELIGHT_URL) throw new Error("Missing LITTLELIGHT_URL in .env");
+const GODROLL_DATABASE_URL = process.env.GODROLL_DATABASE_URL;
+if (!GODROLL_DATABASE_URL) throw new Error("Missing GODROLL_DATABASE_URL in .env");
 
 const MANIFEST_URL = 'https://www.bungie.net/Platform/Destiny2/Manifest/';
 const BUNGIE_BASE = 'https://www.bungie.net';
@@ -56,9 +56,9 @@ async function fetchLanguageSubset(langCode, hashes, manifestMeta) {
 }
 
 async function updateManifest() {
-    console.log("Fetching God Rolls from LittleLight...");
-    const url = process.env.LITTLELIGHT_URL;
-    if (!url) throw new Error("Missing LITTLELIGHT_URL in .env");
+    console.log("Fetching God Rolls from Godroll Database...");
+    const url = GODROLL_DATABASE_URL;
+    if (!url) throw new Error("Missing GODROLL_DATABASE_URL in .env");
     const rollsRes = await fetch(url);
     const rollsData = await rollsRes.json();
     
@@ -75,7 +75,7 @@ async function updateManifest() {
         }
     }
     
-    console.log(`Found ${hashes.size} unique hashes in littlelight.json.`);
+    console.log(`Found ${hashes.size} unique hashes in the Godroll Database.`);
 
     console.log("Fetching Destiny 2 Manifest...");
     const manifestRes = await fetch(MANIFEST_URL);

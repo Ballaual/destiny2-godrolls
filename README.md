@@ -20,11 +20,13 @@ Das Arsenal und Bungies Manifest ändern sich (z. B. nach dem Weekly Reset am Di
 Dadurch ist deine Webseite immer und vollautomatisch aktuell!
 
 ### Setup für GitHub Actions:
-Damit die Action die Daten von Bungie abrufen kann, musst du in deinem GitHub Repository zwei **Repository Secrets** anlegen:
+Damit die Action die Daten von Bungie abrufen kann, musst du in deinem GitHub Repository drei **Repository Secrets** anlegen:
 1. Gehe in deinem GitHub-Repo auf **Settings -> Secrets and variables -> Actions**.
 2. Erstelle »New repository secret«:
    - `BUNGIE_API_KEY` (Dein Bungie Developer API Key)
-   - `LITTLELIGHT_URL` (Die URL zum LittleLight JSON)
+   - `GODROLL_DATABASE_URL` (Die URL zur Godroll Database JSON)
+   - `DISCORD_WEBHOOK_URL` (Die Webhook-URL deines Discord-Forum-Channels)
+
 3. Die Action läuft von nun an automatisch jeden Dienstag um 19:30 UTC. (Oder du drückst unter "Actions" manuell auf *Run workflow*).
 
 Das Skript `npm run sync` pusht dann automatisch einen unsichtbaren Commit in dein Repository, der die Live-Webseite (GitHub Pages) updatet!
@@ -36,17 +38,11 @@ Wir nutzen **GitHub Actions**, um hochauflösende Infografiken deiner God Rolls 
 Das Rendering (Puppeteer/Chrome) findet direkt auf den GitHub-Servern statt. Dein lokales System oder n8n werden dafür **nicht** benötigt.
 
 ### Funktionsweise:
-1. **Wöchentlicher Sync:** Jeden Dienstag um 20:00 UTC (kurz nach dem Bungie-Reset) startet der Workflow.
-2. **Datenabgleich:** Das Skript prüft, ob es neue God Rolls gibt oder ob sich Perks geändert haben (MD5-Hashing).
+1. **Smart Polling (Watchdog):** Der Workflow läuft jede Stunde und prüft, ob sich die Godroll Database geändert hat (Hash-Abgleich).
+2. **Bedarfsgesteuertes Rendering:** Nur bei Änderungen wird der volle Sync-Prozess (Node.js & Puppeteer) gestartet. Das spart Ressourcen und sorgt für schnellstmögliche Updates.
 3. **Rendering:** Puppeteer erstellt ein 1200px breites PNG-Bild für jede Waffe (Deutsch & Englisch).
 4. **Discord Post:** Die Bilder werden per Webhook an dein Discord-Forum gesendet. Bestehende Threads werden aktualisiert (**PATCH**), neue Waffen erhalten einen eigenen Thread (**POST**).
-5. **Status-Speicherung:** Die Datei `scripts/discordState.json` wird nach jedem Lauf automatisch aktualisiert, damit keine doppelten Posts entstehen.
-
-### Setup für die Discord-Synchronisierung:
-Zusätzlich zu den oben genannten Schritten musst du ein weiteres Secret in GitHub anlegen:
-1. Gehe zu **Settings -> Secrets and variables -> Actions**.
-2. Erstelle ein neues Secret:
-   - `DISCORD_WEBHOOK_URL` (Die Webhook-URL deines Discord-Forum-Channels).
+5. **Status-Speicherung:** Fortschritt (`discordState.json`) und Hash (`godroll_database_hash.txt`) werden automatisch im Repo gespeichert.
 
 ### Manueller Start:
 Du kannst den Sync jederzeit manuell anstoßen:

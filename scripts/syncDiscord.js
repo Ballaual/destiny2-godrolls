@@ -32,14 +32,14 @@ async function runDiscordSync() {
         discordState = JSON.parse(fs.readFileSync(STATE_FILE, 'utf-8'));
     }
 
-    console.log("Fetching God Rolls from LittleLight...");
-    const url = process.env.LITTLELIGHT_URL;
-    if (!url) throw new Error("Missing LITTLELIGHT_URL in .env");
+    console.log("Fetching God Rolls from Godroll Database...");
+    const url = process.env.GODROLL_DATABASE_URL;
+    if (!url) throw new Error("Missing GODROLL_DATABASE_URL in .env");
     const rollsRes = await fetch(url);
     const rollsData = await rollsRes.json();
 
     if (!rollsData || !rollsData.data) {
-        console.error("Failed to fetch LittleLight JSON.");
+        console.error("Failed to fetch Godroll Database JSON.");
         return;
     }
 

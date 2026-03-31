@@ -21,10 +21,12 @@ function App() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
+        setLoading(true);
+        // Fetch Godroll Database and Manifest Data
         const [rollsRes, manifestRes] = await Promise.all([
-          fetch('https://raw.githubusercontent.com/MoveJockey/Destiny-2-God-Rolls/refs/heads/main/littlelight.json'),
+          fetch(import.meta.env.VITE_GODROLL_DATABASE_URL),
           fetch(`${import.meta.env.BASE_URL}destinyData.json`)
         ]);
         

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import Home from './components/Home';
 import WeaponDetail from './components/WeaponDetail';
 import Header from './components/Header'; // We'll extract header to access params

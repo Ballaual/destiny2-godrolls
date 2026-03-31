@@ -4,12 +4,15 @@ Dieses Repository enthält das **Vite/React Web-Frontend** für Destiny 2 God Ro
 
 ## 1. Hosting auf GitHub Pages (Webseite)
 
-Da die App mit Vite und React gebaut ist, kannst du sie völlig kostenlos auf GitHub Pages hosten:
+Die App ist so konfiguriert, dass sie automatisch bei jedem Push auf den `master`-Branch über **GitHub Actions** zu GitHub Pages deployed wird.
 
-1. Lade dieses Projekt in ein neues GitHub-Repository hoch.
-2. In den **Settings** deines Repositories navigiere zu **Pages**.
-3. Wähle als Source `GitHub Actions` (falls du den Vite-Deploy-Workflow nutzt) oder setze in deiner `vite.config.js` den `base`-Pfad korrekt auf `'/dein-repo-name/'`, führe lokal `npm run build` aus und lade den `dist/`-Ordner hoch.
-4. *Hinweis zum Router:* Da GitHub Pages simple statische Server nutzt, müssen Client-Side `react-router` URLs ggf. via HashRouter oder `404.html`-Tricks abgefangen werden, falls direkte Unterseitenfehler auftreten.
+### Setup im Repository:
+1. Navigiere in deinem GitHub-Repo zu **Settings > Pages**.
+2. Wähle unter **Build and deployment > Source** die Option **"GitHub Actions"** aus.
+3. Sobald du Änderungen (einschließlich dieser) in den `master`-Branch pushst, startet der Workflow `Deploy to GitHub Pages` automatisch.
+4. Deine Seite ist anschließend unter `https://<dein-username>.github.io/<dein-repo-name>/` erreichbar.
+
+*Hinweis zum Routing:* Die App nutzt nun den `HashRouter`. Deine URLs sehen also so aus: `.../#/de/weapon/123`. Dies garantiert, dass die App auch nach einem Refresh auf Unterseiten reibungslos funktioniert.
 
 ## 2. GitHub Actions (Automatisches Manifest Update)
 

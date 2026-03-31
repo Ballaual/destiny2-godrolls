@@ -25,9 +25,12 @@ function App() {
       try {
         const [rollsRes, manifestRes] = await Promise.all([
           fetch('https://raw.githubusercontent.com/MoveJockey/Destiny-2-God-Rolls/refs/heads/main/littlelight.json'),
-          fetch('/destinyData.json')
+          fetch(`${import.meta.env.BASE_URL}destinyData.json`)
         ]);
         
+        if (!rollsRes.ok) throw new Error(`Failed to fetch rolls: ${rollsRes.status}`);
+        if (!manifestRes.ok) throw new Error(`Failed to fetch manifest: ${manifestRes.status}`);
+
         const rollsData = await rollsRes.json();
         const manifestData = await manifestRes.json();
         

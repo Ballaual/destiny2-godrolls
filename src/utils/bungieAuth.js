@@ -59,7 +59,6 @@ export async function handleCallback(code, state) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'X-API-Key': API_KEY,
     },
     body: body.toString(),
   });

@@ -552,6 +552,41 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════
+   AUTH ERROR BANNER
+   ═══════════════════════════════════════════════════════ */
+
+.auth-error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 80, 80, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  border-radius: 12px;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  animation: bannerSlideIn 0.3s ease-out;
+}
+
+.auth-error-banner:hover {
+  background: rgba(255, 80, 80, 0.2);
+}
+
+.auth-error-close {
+  font-size: 1.1rem;
+  opacity: 0.6;
+}
+
+@keyframes bannerSlideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════════
    BUNGIE LOGIN & PROFILE STYLES
    ═══════════════════════════════════════════════════════ */
 

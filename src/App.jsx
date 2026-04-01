@@ -23,6 +23,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [bungieUser, setBungieUser] = useState(null);
   const [authProcessing, setAuthProcessing] = useState(false);
+  const [authError, setAuthError] = useState(null);
 
   // Handle OAuth callback — the ?code= comes BEFORE the hash in the URL
   useEffect(() => {
@@ -33,16 +34,18 @@ function App() {
 
       if (code) {
         setAuthProcessing(true);
+        setAuthError(null);
+        // Always clean up the URL so the code doesn't get re-used on refresh
+        const cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+        window.history.replaceState({}, document.title, cleanUrl);
         try {
           await handleCallback(code, state);
-          // Remove query params from URL after processing
-          const cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
-          window.history.replaceState({}, document.title, cleanUrl);
           // Fetch user data
           const userData = await getCurrentUser();
           setBungieUser(userData);
         } catch (error) {
           console.error('OAuth callback error:', error);
+          setAuthError(error.message);
         } finally {
           setAuthProcessing(false);
         }
@@ -132,6 +135,12 @@ function App() {
       <Router>
         <div className="app-container">
           <Header />
+          {authError && (
+            <div className="auth-error-banner" onClick={() => setAuthError(null)}>
+              <span>⚠️ Login fehlgeschlagen: {authError}</span>
+              <span className="auth-error-close">✕</span>
+            </div>
+          )}
           {(loading || authProcessing) ? (
             <div className="loader-container">
               <div className="loader"></div>

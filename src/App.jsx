@@ -84,7 +84,7 @@ function App() {
       }
     };
     
-    fetchData();
+    loadData();
   }, []);
 
   return (

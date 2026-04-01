@@ -2,10 +2,8 @@ name: Discord Sync (Infographics)
 
 on:
   schedule:
-    # Jeden Dienstag um 20:00 UTC (Sicherheits-Run)
-    - cron: '0 20 * * 2'
-    # Zusätzlicher Check jede Stunde
-    - cron: '0 * * * *'
+    # Check alle 2 Stunden
+    - cron: '0 */2 * * *'
   workflow_dispatch:
   repository_dispatch:
     types: [trigger-sync]

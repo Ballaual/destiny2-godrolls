@@ -8,11 +8,11 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BUNGIE_API_KEY = process.env.BUNGIE_API_KEY;
-if (!BUNGIE_API_KEY) throw new Error("Missing BUNGIE_API_KEY in .env");
+const BUNGIE_API_KEY = process.env.VITE_BUNGIE_API_KEY || process.env.BUNGIE_API_KEY;
+if (!BUNGIE_API_KEY) throw new Error("Missing VITE_BUNGIE_API_KEY in .env");
 
-const GODROLL_DATABASE_URL = process.env.GODROLL_DATABASE_URL;
-if (!GODROLL_DATABASE_URL) throw new Error("Missing GODROLL_DATABASE_URL in .env");
+const GODROLL_DATABASE_URL = process.env.VITE_GODROLL_DATABASE_URL || process.env.GODROLL_DATABASE_URL;
+if (!GODROLL_DATABASE_URL) throw new Error("Missing VITE_GODROLL_DATABASE_URL in .env");
 
 const MANIFEST_URL = 'https://www.bungie.net/Platform/Destiny2/Manifest/';
 const BUNGIE_BASE = 'https://www.bungie.net';

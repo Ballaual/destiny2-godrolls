@@ -33,8 +33,8 @@ async function runDiscordSync() {
     }
 
     console.log("Fetching God Rolls from Godroll Database...");
-    const url = process.env.GODROLL_DATABASE_URL;
-    if (!url) throw new Error("Missing GODROLL_DATABASE_URL in .env");
+    const url = process.env.VITE_GODROLL_DATABASE_URL || process.env.GODROLL_DATABASE_URL;
+    if (!url) throw new Error("Missing VITE_GODROLL_DATABASE_URL in .env");
     const rollsRes = await fetch(url);
     const rollsData = await rollsRes.json();
 

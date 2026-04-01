@@ -34,6 +34,8 @@ jobs:
         run: npm run build
         env:
           VITE_GODROLL_DATABASE_URL: ${{ secrets.GODROLL_DATABASE_URL }}
+          VITE_BUNGIE_API_KEY: ${{ secrets.BUNGIE_API_KEY }}
+          VITE_BUNGIE_CLIENT_ID: ${{ secrets.BUNGIE_CLIENT_ID }}
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

@@ -2,7 +2,9 @@ import React, { createContext, useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import Home from './components/Home';
 import WeaponDetail from './components/WeaponDetail';
-import Header from './components/Header'; // We'll extract header to access params
+import Profile from './components/Profile';
+import Header from './components/Header';
+import { handleCallback, isLoggedIn, getCurrentUser } from './utils/bungieAuth';
 
 export const AppContext = createContext();
 
@@ -19,6 +21,44 @@ function App() {
   const [destinyData, setDestinyData] = useState({ en: {}, de: {} });
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [bungieUser, setBungieUser] = useState(null);
+  const [authProcessing, setAuthProcessing] = useState(false);
+
+  // Handle OAuth callback — the ?code= comes BEFORE the hash in the URL
+  useEffect(() => {
+    const processOAuthCallback = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      const state = urlParams.get('state');
+
+      if (code) {
+        setAuthProcessing(true);
+        try {
+          await handleCallback(code, state);
+          // Remove query params from URL after processing
+          const cleanUrl = window.location.origin + window.location.pathname + window.location.hash;
+          window.history.replaceState({}, document.title, cleanUrl);
+          // Fetch user data
+          const userData = await getCurrentUser();
+          setBungieUser(userData);
+        } catch (error) {
+          console.error('OAuth callback error:', error);
+        } finally {
+          setAuthProcessing(false);
+        }
+      } else if (isLoggedIn()) {
+        // Restore existing session
+        try {
+          const userData = await getCurrentUser();
+          setBungieUser(userData);
+        } catch (error) {
+          console.error('Failed to restore session:', error);
+        }
+      }
+    };
+
+    processOAuthCallback();
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -88,11 +128,11 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider value={{ rolls, destinyData, search, setSearch }}>
+    <AppContext.Provider value={{ rolls, destinyData, search, setSearch, bungieUser, setBungieUser }}>
       <Router>
         <div className="app-container">
           <Header />
-          {loading ? (
+          {(loading || authProcessing) ? (
             <div className="loader-container">
               <div className="loader"></div>
             </div>
@@ -101,6 +141,7 @@ function App() {
               <Route path="/" element={<Navigate to="/de" replace />} />
               <Route path="/:lang" element={<AppRoutes />} />
               <Route path="/:lang/weapon/:id" element={<WeaponDetail />} />
+              <Route path="/:lang/profile" element={<Profile />} />
             </Routes>
           )}
         </div>

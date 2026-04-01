@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../App';
+import LoginButton from './LoginButton';
 
 const Header = () => {
   const location = useLocation();
@@ -52,6 +53,8 @@ const Header = () => {
             onChange={handleSearchChange}
             style={{ width: '250px', marginBottom: 0 }}
           />
+
+          <LoginButton />
 
           <div className="lang-toggle">
             <button 

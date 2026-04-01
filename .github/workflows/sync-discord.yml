@@ -59,7 +59,7 @@ jobs:
         if: steps.watchdog.outputs.FORCE_RUN == 'true'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          GODROLL_DATABASE_URL: ${{ secrets.GODROLL_DATABASE_URL }}
+          VITE_GODROLL_DATABASE_URL: ${{ secrets.GODROLL_DATABASE_URL }}
         run: npm run discord-sync
 
       - name: Commit and Push Changes (State & Hash)

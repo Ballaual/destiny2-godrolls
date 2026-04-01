@@ -25,8 +25,8 @@ jobs:
 
       - name: Run Manifest Update Script
         env:
-          BUNGIE_API_KEY: ${{ secrets.BUNGIE_API_KEY }}
-          GODROLL_DATABASE_URL: ${{ secrets.GODROLL_DATABASE_URL }}
+          VITE_BUNGIE_API_KEY: ${{ secrets.BUNGIE_API_KEY }}
+          VITE_GODROLL_DATABASE_URL: ${{ secrets.GODROLL_DATABASE_URL }}
         run: npm run sync
 
       - name: Commit and Push Changes

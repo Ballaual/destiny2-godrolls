@@ -26,4 +26,3 @@ dist-ssr
 # Security
 .env
 .env.local
-scripts/discordState.json

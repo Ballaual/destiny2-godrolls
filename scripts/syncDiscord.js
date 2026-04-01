@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 const WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 if (!WEBHOOK_URL) throw new Error("Missing DISCORD_WEBHOOK_URL in .env");
 
-const STATE_FILE = path.join(__dirname, 'discordState.json');
+const STATE_FILE = path.join(__dirname, '../data/discordState.json');
 const MANIFEST_FILE = path.join(__dirname, '../public/destinyData.json');
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));

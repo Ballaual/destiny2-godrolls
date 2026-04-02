@@ -137,7 +137,8 @@ export async function bungieApiRequest(path) {
   });
 
   if (!response.ok) {
-    throw new Error(`Bungie API request failed: ${response.status}`);
+    const errorBody = await response.text();
+    throw new Error(`Bungie API ${response.status}: ${errorBody}`);
   }
 
   const data = await response.json();

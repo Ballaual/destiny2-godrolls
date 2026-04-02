@@ -9,15 +9,17 @@
  */
 
 const BUNGIE_AUTH_URL = 'https://www.bungie.net/en/OAuth/Authorize';
-const BUNGIE_TOKEN_PROXY = import.meta.env.VITE_BUNGIE_TOKEN_PROXY;
-const BUNGIE_TOKEN_URL_DIRECT = 'https://www.bungie.net/Platform/App/OAuth/token/';
-const BUNGIE_API_BASE = 'https://www.bungie.net/Platform';
+const PROXY_BASE = import.meta.env.VITE_BUNGIE_TOKEN_PROXY;
+
+// Direct Bungie URLs (fallback if no proxy)
+const BUNGIE_API_BASE_DIRECT = 'https://www.bungie.net/Platform';
 
 const CLIENT_ID = import.meta.env.VITE_BUNGIE_CLIENT_ID;
 const API_KEY = import.meta.env.VITE_BUNGIE_API_KEY;
 
-// Use proxy if available (needed because Bungie's token endpoint blocks browser Origin headers)
-const BUNGIE_TOKEN_URL = BUNGIE_TOKEN_PROXY || BUNGIE_TOKEN_URL_DIRECT;
+// Route through proxy to bypass Bungie's Origin header restrictions
+const BUNGIE_TOKEN_URL = PROXY_BASE ? `${PROXY_BASE}/token` : 'https://www.bungie.net/Platform/App/OAuth/token/';
+const BUNGIE_API_BASE = PROXY_BASE ? `${PROXY_BASE}/api` : BUNGIE_API_BASE_DIRECT;
 
 // ── Helpers ───────────────────────────────────────────────────
 
@@ -66,6 +68,8 @@ export async function handleCallback(code, state) {
     },
     body: body.toString(),
   });
+
+  console.log('[Auth] Token exchange status:', response.status);
 
   if (!response.ok) {
     const errorText = await response.text();

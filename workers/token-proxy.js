@@ -1,21 +1,18 @@
 /**
- * Cloudflare Worker — Bungie OAuth Token Proxy
+ * Cloudflare Worker — Bungie API Proxy
  * 
- * Diesen Worker auf Cloudflare deployen (kostenlos).
- * Er leitet die Token-Anfrage an Bungie weiter und umgeht
- * die CORS/Origin-Beschränkung des Bungie Token-Endpoints.
+ * Leitet alle Bungie API Requests durch und entfernt den Origin-Header,
+ * der von Bungie blockiert wird.
  * 
- * Setup:
- * 1. Gehe zu https://dash.cloudflare.com → Workers & Pages → Create
- * 2. Klicke "Create Worker"
- * 3. Ersetze den Code mit diesem Script
- * 4. Deploy → Die Worker-URL sieht so aus: https://dein-worker.dein-account.workers.dev
- * 5. Trage die Worker-URL als VITE_BUNGIE_TOKEN_PROXY in deine .env ein
+ * Unterstützt:
+ * - POST /token → Token-Austausch
+ * - GET /api/* → Alle Bungie Platform API Calls
  */
 
-const BUNGIE_TOKEN_URL = 'https://www.bungie.net/Platform/App/OAuth/token/';
+const BUNGIE_BASE = 'https://www.bungie.net';
+const BUNGIE_TOKEN_PATH = '/Platform/App/OAuth/token/';
 
-// Erlaubte Origins (passe an deine Domains an)
+// Erlaubte Origins
 const ALLOWED_ORIGINS = [
   'https://ballaual.github.io',
   'http://localhost:5173',
@@ -25,44 +22,70 @@ const ALLOWED_ORIGINS = [
 function corsHeaders(origin) {
   return {
     'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, X-API-Key, Authorization',
   };
+}
+
+function isAllowed(origin) {
+  return ALLOWED_ORIGINS.includes(origin);
 }
 
 export default {
   async fetch(request) {
     const origin = request.headers.get('Origin') || '';
+    const url = new URL(request.url);
 
     // CORS Preflight
     if (request.method === 'OPTIONS') {
-      if (ALLOWED_ORIGINS.includes(origin)) {
+      if (isAllowed(origin)) {
         return new Response(null, { status: 204, headers: corsHeaders(origin) });
       }
       return new Response('Forbidden', { status: 403 });
     }
 
-    // Nur POST erlauben
-    if (request.method !== 'POST') {
-      return new Response('Method not allowed', { status: 405 });
-    }
-
     // Origin prüfen
-    if (!ALLOWED_ORIGINS.includes(origin)) {
+    if (!isAllowed(origin)) {
       return new Response('Forbidden origin', { status: 403 });
     }
 
-    // Request-Body durchleiten an Bungie
-    const body = await request.text();
+    let bungieUrl;
+    let bungieInit;
 
-    const bungieResponse = await fetch(BUNGIE_TOKEN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: body,
-    });
+    if (request.method === 'POST' && url.pathname === '/token') {
+      // ── Token Exchange ──────────────────────────
+      const body = await request.text();
+      bungieUrl = `${BUNGIE_BASE}${BUNGIE_TOKEN_PATH}`;
+      bungieInit = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body,
+      };
 
+    } else if (request.method === 'GET' && url.pathname.startsWith('/api/')) {
+      // ── API Proxy ───────────────────────────────
+      // /api/User/GetMembershipsForCurrentUser/ → /Platform/User/GetMembershipsForCurrentUser/
+      const apiPath = url.pathname.replace('/api/', '/Platform/');
+      const search = url.search || '';
+      bungieUrl = `${BUNGIE_BASE}${apiPath}${search}`;
+
+      // Forward auth headers
+      const headers = {};
+      if (request.headers.has('X-API-Key')) {
+        headers['X-API-Key'] = request.headers.get('X-API-Key');
+      }
+      if (request.headers.has('Authorization')) {
+        headers['Authorization'] = request.headers.get('Authorization');
+      }
+
+      bungieInit = { method: 'GET', headers };
+
+    } else {
+      return new Response('Not found', { status: 404 });
+    }
+
+    // Request an Bungie senden (ohne Origin-Header!)
+    const bungieResponse = await fetch(bungieUrl, bungieInit);
     const responseBody = await bungieResponse.text();
 
     return new Response(responseBody, {

@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../App';
-import LoginButton from './LoginButton';
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { search, setSearch } = useContext(AppContext);
-  
+
   // Extract lang from URL e.g. /de/weapon/123 -> de
   const pathParts = location.pathname.split('/');
   const lang = (pathParts[1] === 'en' || pathParts[1] === 'de') ? pathParts[1] : 'de';
@@ -30,8 +29,8 @@ const Header = () => {
     <header className="header">
       <div className="header-top">
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div 
-            className="header-logo" 
+          <div
+            className="header-logo"
             onClick={() => { setSearch(''); navigate(`/${lang}`); }}
             style={{ cursor: 'pointer' }}
           >
@@ -43,25 +42,23 @@ const Header = () => {
             {lang === 'de' ? 'Entdecke die besten Waffen-Rolls für PVE und PVP.' : 'Discover the best weapon rolls for PVE and PVP.'}
           </p>
         </div>
-        
+
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-          <input 
-            type="text" 
-            className="search-input" 
-            placeholder={lang === 'de' ? "Nach Waffe suchen..." : "Search weapon..."} 
+          <input
+            type="text"
+            className="search-input"
+            placeholder={lang === 'de' ? "Nach Waffe suchen..." : "Search weapon..."}
             value={search}
             onChange={handleSearchChange}
             style={{ width: '250px', marginBottom: 0 }}
           />
 
-          <LoginButton />
-
           <div className="lang-toggle">
-            <button 
+            <button
               className={`lang-btn ${lang === 'de' ? 'active' : ''}`}
               onClick={() => setLang('de')}
             >DE</button>
-            <button 
+            <button
               className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
               onClick={() => setLang('en')}
             >EN</button>

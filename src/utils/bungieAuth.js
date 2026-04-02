@@ -9,11 +9,15 @@
  */
 
 const BUNGIE_AUTH_URL = 'https://www.bungie.net/en/OAuth/Authorize';
-const BUNGIE_TOKEN_URL = 'https://www.bungie.net/Platform/App/OAuth/token/';
+const BUNGIE_TOKEN_PROXY = import.meta.env.VITE_BUNGIE_TOKEN_PROXY;
+const BUNGIE_TOKEN_URL_DIRECT = 'https://www.bungie.net/Platform/App/OAuth/token/';
 const BUNGIE_API_BASE = 'https://www.bungie.net/Platform';
 
 const CLIENT_ID = import.meta.env.VITE_BUNGIE_CLIENT_ID;
 const API_KEY = import.meta.env.VITE_BUNGIE_API_KEY;
+
+// Use proxy if available (needed because Bungie's token endpoint blocks browser Origin headers)
+const BUNGIE_TOKEN_URL = BUNGIE_TOKEN_PROXY || BUNGIE_TOKEN_URL_DIRECT;
 
 // ── Helpers ───────────────────────────────────────────────────
 

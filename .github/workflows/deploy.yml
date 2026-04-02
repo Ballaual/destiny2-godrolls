@@ -36,6 +36,7 @@ jobs:
           VITE_GODROLL_DATABASE_URL: ${{ secrets.GODROLL_DATABASE_URL }}
           VITE_BUNGIE_API_KEY: ${{ secrets.BUNGIE_API_KEY }}
           VITE_BUNGIE_CLIENT_ID: ${{ secrets.BUNGIE_CLIENT_ID }}
+          VITE_BUNGIE_TOKEN_PROXY: ${{ secrets.BUNGIE_TOKEN_PROXY }}
       
       - name: Setup Pages
         uses: actions/configure-pages@v4

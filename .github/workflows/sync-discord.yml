@@ -2,11 +2,14 @@ name: Discord Sync (Infographics)
 
 on:
   schedule:
-    # Check alle 2 Stunden
-    - cron: '0 */2 * * *'
+    # Check alle 6 Stunden
+    - cron: '0 */6 * * *'
   workflow_dispatch:
   repository_dispatch:
     types: [trigger-sync]
+
+permissions:
+  contents: write
 
 jobs:
   sync-discord:

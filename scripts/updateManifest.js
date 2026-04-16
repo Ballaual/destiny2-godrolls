@@ -48,7 +48,8 @@ async function fetchLanguageSubset(langCode, hashes, manifestMeta) {
                 screenshot: item.screenshot ? `${BUNGIE_BASE}${item.screenshot}` : null,
                 itemTypeDisplayName: item.itemTypeDisplayName,
                 equippingBlock: item.equippingBlock ? { ammoType: item.equippingBlock.ammoType } : null,
-                source: sourceStr
+                source: sourceStr,
+                traitIds: item.traitIds || []
             };
         }
     }
@@ -64,14 +65,17 @@ async function updateManifest() {
     
     // Collect all hashes into a Set
     const hashes = new Set();
-    for (const roll of rollsData.data) {
-        if (roll.hash) hashes.add(roll.hash.toString());
-        if (roll.plugs) {
-            for (const plugGroup of roll.plugs) {
-                for (const plugHash of plugGroup) {
-                    hashes.add(plugHash.toString());
-                }
-            }
+    const entries = rollsData.entries || rollsData.data || [];
+    
+    for (const roll of entries) {
+        const itemHash = roll.itemHash || roll.hash;
+        if (itemHash) hashes.add(itemHash.toString());
+        
+        const perks = roll.perkHashes || roll.plugs || [];
+        if (Array.isArray(perks)) {
+            perks.flat().forEach(p => {
+                if (p) hashes.add(p.toString());
+            });
         }
     }
     

@@ -36,43 +36,140 @@ function App() {
         const rollsData = await rollsRes.json();
         const manifestData = await manifestRes.json();
 
-        if (rollsData && rollsData.data && manifestData && manifestData.en && manifestData.de) {
+        if (rollsData && rollsData.entries && manifestData && manifestData.en && manifestData.de) {
           const groupedMap = new Map();
 
-          rollsData.data.forEach((roll) => {
-            const rawName = manifestData.en[roll.hash]?.name || roll.name || "Unknown";
+          rollsData.entries.forEach((roll) => {
+            const rawHash = roll.itemHash || roll.hash;
+            const rawItemData = manifestData.en[rawHash] || {};
+            const rawName = rawItemData.name || roll.name || "Unknown";
             const baseName = rawName.replace(/\s*\(Adept\)|\s*\(Harrowed\)|\s*\(Timelost\)|\s*\(Baroque\)/g, '').trim();
 
             if (!groupedMap.has(baseName)) {
               groupedMap.set(baseName, {
-                id: roll.hash.toString(), // The user wants the weapon ID (hash) in the url!
+                id: baseName.toLowerCase().replace(/\s+/g, '-'),
                 baseName,
-                hash: roll.hash,
+                hash: rawHash,
+                hashes: new Set(),
+                sourcesMap: new Map(), // source -> maxVersion
                 tags: new Set(),
-                rolls: []
+                rolls: [],
+                version: 0,
+                versionScore: 0
               });
             }
 
             const weaponGroup = groupedMap.get(baseName);
-            const isCurrentAdept = manifestData.en[weaponGroup.hash]?.name.includes('(Adept)');
-            const isThisAdept = rawName.includes('(Adept)');
+            weaponGroup.hashes.add(rawHash);
+            
+            // Extract release version and category score for THIS item (Trait-ID based)
+            let traitVersion = 0;
+            let traitCategoryScore = 0;
+            const traitIds = rawItemData.traitIds || [];
+            traitIds.forEach(id => {
+              const match = id.match(/releases\.v(\d+)\.?(\w+)?/);
+              if (match) {
+                const ver = parseInt(match[1]);
+                if (ver > traitVersion) traitVersion = ver;
+                
+                const cat = match[2] || '';
+                let catScore = 0;
+                if (cat === 'dlc') catScore = 3000;
+                else if (cat === 'season') catScore = 2000;
+                else if (cat === 'annual') catScore = 1500;
+                
+                if (catScore > traitCategoryScore) traitCategoryScore = catScore;
+              }
+            });
 
-            if (isCurrentAdept && !isThisAdept) {
-              weaponGroup.hash = roll.hash;
-              weaponGroup.id = roll.hash.toString(); // Update ID to match base weapon hash
+            // Note-based version extraction (highest priority)
+            let noteVersionScore = 0;
+            const noteMatch = roll.notes?.match(/Version:\s*S(\d+)/i);
+            if (noteMatch) {
+              const sNum = parseInt(noteMatch[1]);
+              // Assign a very high score for note-based versions to prioritize over trait-ids
+              // 10000 base + (season count * 10)
+              noteVersionScore = 10000 + (sNum * 10);
             }
 
+            // Decide final score for this specific roll
+            const currentItemScore = Math.max(noteVersionScore, traitCategoryScore + traitVersion);
+
+            // Global group metadata (thumbnail, max score)
+            if (currentItemScore > weaponGroup.versionScore) {
+              weaponGroup.versionScore = currentItemScore;
+              weaponGroup.version = traitVersion; // Keep internal trait version for other logic
+              
+              const isThisAdept = rawName.includes('(Adept)');
+              const isCurrentAdept = manifestData.en[weaponGroup.hash]?.name.includes('(Adept)');
+              if (isThisAdept || (!isCurrentAdept)) {
+                 weaponGroup.hash = rawHash;
+              }
+            }
+
+            // Collect Sources (Multilingual)
+            ['en', 'de'].forEach(l => {
+              const itemData = manifestData[l][rawHash];
+              const sourceText = itemData?.source;
+              if (sourceText) {
+                if (!weaponGroup.sourcesMaps) weaponGroup.sourcesMaps = { en: new Map(), de: new Map() };
+                const map = weaponGroup.sourcesMaps[l];
+                const currentMax = map.get(sourceText) || 0;
+                if (traitVersion > currentMax) {
+                  map.set(sourceText, traitVersion);
+                }
+              }
+            });
+
             roll.tags?.forEach(t => weaponGroup.tags.add(t));
-            // Only add roll if it doesn't already exist to avoid redundancy
-            if (!weaponGroup.rolls.some(r => JSON.stringify(r.plugs) === JSON.stringify(roll.plugs))) {
-              weaponGroup.rolls.push(roll);
+            
+            const normalizedRoll = {
+              ...roll,
+              hash: rawHash,
+              versionScore: currentItemScore, // Capture final score for sorting within group
+              plugs: roll.perkHashes || roll.plugs || []
+            };
+
+            if (!weaponGroup.rolls.some(r => 
+              JSON.stringify(r.plugs) === JSON.stringify(normalizedRoll.plugs) && 
+              r.notes === normalizedRoll.notes
+            )) {
+              weaponGroup.rolls.push(normalizedRoll);
             }
           });
 
-          const finalWeapons = Array.from(groupedMap.values()).map(w => ({
-            ...w,
-            tags: Array.from(w.tags)
-          }));
+          // Sort rolls within each group (Newest Version First, then PVE First)
+          groupedMap.forEach(group => {
+            group.rolls.sort((a, b) => {
+              // 1. Sort by version score descending
+              if (b.versionScore !== a.versionScore) {
+                 return b.versionScore - a.versionScore;
+              }
+              // 2. Sort by tags (PVE first)
+              const aIsPve = (a.tags || []).includes('GodPVE');
+              const bIsPve = (b.tags || []).includes('GodPVE');
+              if (aIsPve && !bIsPve) return -1;
+              if (!aIsPve && bIsPve) return 1;
+              return 0;
+            });
+            
+            // Finalize sources list for both languages
+            group.sources = { en: [], de: [] };
+            ['en', 'de'].forEach(l => {
+               if (group.sourcesMaps && group.sourcesMaps[l]) {
+                 group.sources[l] = Array.from(group.sourcesMaps[l].entries())
+                   .sort((a, b) => b[1] - a[1])
+                   .map(entry => entry[0]);
+               }
+            });
+          });
+
+          const finalWeapons = Array.from(groupedMap.values())
+            .map(w => ({
+              ...w,
+              tags: Array.from(w.tags)
+            }))
+            .sort((a, b) => b.versionScore - a.versionScore); // Sort by weighted version score descending
 
           setRolls(finalWeapons);
           setDestinyData(manifestData);

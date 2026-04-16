@@ -19,6 +19,42 @@ const MANIFEST_FILE = path.join(__dirname, '../public/destinyData.json');
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+/**
+ * Reconstructs a 5-column layout from a flat list of perks using manifest types.
+ */
+function reconstructPerkColumns(perkHashes, manifest) {
+    const columns = [[], [], [], [], []];
+    const seen = new Set();
+
+    perkHashes.forEach(hash => {
+        if (seen.has(hash)) return;
+        seen.add(hash);
+
+        const data = manifest[hash] || {};
+        const type = (data.itemTypeDisplayName || "").toLowerCase();
+
+        if (type.includes("barrel") || type.includes("sight") || type.includes("scope") || type.includes("frame") || type.includes("intrinsic") || type.includes("arrow") || type.includes("haft")) {
+            columns[0].push(hash);
+        } else if (type.includes("magazine") || type.includes("battery") || type.includes("guard") || type.includes("arrow shaft")) {
+            columns[1].push(hash);
+        } else if (type.includes("trait")) {
+            if (columns[2].length === 0) {
+                columns[2].push(hash);
+            } else if (columns[3].length === 0) {
+                columns[3].push(hash);
+            } else {
+                // Fallback for more than 2 traits
+                columns[3].push(hash);
+            }
+        } else {
+            // Origin Traits, Masterworks, etc.
+            columns[4].push(hash);
+        }
+    });
+
+    return columns;
+}
+
 async function runDiscordSync() {
     console.log("Loading Local Manifest...");
     if (!fs.existsSync(MANIFEST_FILE)) {
@@ -38,22 +74,23 @@ async function runDiscordSync() {
     const rollsRes = await fetch(url);
     const rollsData = await rollsRes.json();
 
-    if (!rollsData || !rollsData.data) {
-        console.error("Failed to fetch Godroll Database JSON.");
+    if (!rollsData || !rollsData.entries) {
+        console.error("Failed to fetch Godroll Database JSON (no entries found).");
         return;
     }
 
     // GROUPING LOGIC (Identical to Frontend)
     const groupedMap = new Map();
-    rollsData.data.forEach((roll) => {
-        const rawName = manifestData.en[roll.hash]?.name || roll.name || "Unknown";
+    rollsData.entries.forEach((roll) => {
+        const rawHash = roll.itemHash || roll.hash;
+        const rawName = manifestData.en[rawHash]?.name || roll.name || "Unknown";
         const baseName = rawName.replace(/\s*\(Adept\)|\s*\(Harrowed\)|\s*\(Timelost\)|\s*\(Baroque\)/g, '').trim();
         
         if (!groupedMap.has(baseName)) {
             groupedMap.set(baseName, {
-                id: roll.hash.toString(),
+                id: rawHash.toString(),
                 baseName,
-                hash: roll.hash,
+                hash: rawHash,
                 tags: new Set(),
                 rolls: []
             });
@@ -64,12 +101,22 @@ async function runDiscordSync() {
         const isThisAdept = rawName.includes('(Adept)');
         
         if (isCurrentAdept && !isThisAdept) {
-            weaponGroup.hash = roll.hash;
-            weaponGroup.id = roll.hash.toString();
+            weaponGroup.hash = rawHash;
+            weaponGroup.id = rawHash.toString();
         }
         roll.tags?.forEach(t => weaponGroup.tags.add(t));
-        if (!weaponGroup.rolls.some(r => JSON.stringify(r.plugs) === JSON.stringify(roll.plugs))) {
-            weaponGroup.rolls.push(roll);
+        
+        const normalizedRoll = {
+            ...roll,
+            hash: rawHash,
+            plugs: roll.perkHashes || roll.plugs || []
+        };
+
+        if (!weaponGroup.rolls.some(r => 
+            JSON.stringify(r.plugs) === JSON.stringify(normalizedRoll.plugs) && 
+            r.notes === normalizedRoll.notes
+        )) {
+            weaponGroup.rolls.push(normalizedRoll);
         }
     });
 
@@ -121,6 +168,11 @@ async function runDiscordSync() {
            let rNameDe = (r.tags && r.tags.includes("GodPVE")) ? "PVE God Roll" : (r.tags && r.tags.includes("GodPVP")) ? "PVP God Roll" : "God Roll";
            let rNameEn = (r.tags && r.tags.includes("GodPVE")) ? "PVE God Roll" : (r.tags && r.tags.includes("GodPVP")) ? "PVP God Roll" : "God Roll";
            
+           if (r.notes) {
+               rNameDe += ` (${r.notes})`;
+               rNameEn += ` (${r.notes})`;
+           }
+
            let titleColor = rNameDe.includes("PVE") ? "#06b6d4" : rNameDe.includes("PVP") ? "#ef4444" : "#fbbf24";
 
            deRollsHtml += `<h2 style="color: ${titleColor}; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-top: 30px; margin-bottom: 15px; text-shadow: 0 0 12px ${titleColor}88;">${rNameDe}</h2>`;
@@ -129,7 +181,10 @@ async function runDiscordSync() {
            enRollsHtml += `<h2 style="color: ${titleColor}; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-top: 30px; margin-bottom: 15px; text-shadow: 0 0 12px ${titleColor}88;">${rNameEn}</h2>`;
            enRollsHtml += `<div style="display: flex; gap: 12px; margin-bottom: 20px;">`;
            
-           r.plugs && r.plugs.forEach((col, idx) => {
+           // If plugs is flat (from perkHashes), reconstruct it to 2D
+           const plugs2D = Array.isArray(r.plugs[0]) ? r.plugs : reconstructPerkColumns(r.plugs, manifestData.en);
+
+           plugs2D.forEach((col, idx) => {
                const firstPlug = col[0];
                const perkDeData = manifestData.de[firstPlug] || {};
                const perkEnData = manifestData.en[firstPlug] || {};

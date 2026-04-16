@@ -33,9 +33,15 @@ const GodRollCard = ({ roll, lang }) => {
   const { destinyData } = useContext(AppContext);
   const navigate = useNavigate();
   
-  const isPve = tags.includes('GodPVE');
-  const isPvp = tags.includes('GodPVP');
+  const allTags = roll.rolls.reduce((acc, r) => {
+    r.tags?.forEach(t => acc.add(t));
+    return acc;
+  }, new Set());
+
+  const isPve = allTags.has('GodPVE');
+  const isPvp = allTags.has('GodPVP');
   const cardClass = isPve && isPvp ? 'both-card' : isPve ? 'pve-card' : isPvp ? 'pvp-card' : '';
+  const variantCount = roll.rolls.length;
   
   const manifestLangData = destinyData[lang] || {};
   const weaponData = manifestLangData[hash] || {};
@@ -61,11 +67,19 @@ const GodRollCard = ({ roll, lang }) => {
           <h2 className="weapon-name">{weaponData.name || baseName}</h2>
           <div className="card-meta" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.4rem', marginTop: '0.2rem' }}>
             {weaponType && <span className="weapon-type" style={{ width: '100%', overflow: 'hidden', textOverflow: 'ellipsis' }}>{weaponType}</span>}
+            <div className="weapon-sources-list">
+              {roll.sources?.[lang]?.length > 0 ? roll.sources[lang].join(', ') : (lang === 'de' ? 'Unbekannte Quelle' : 'Unknown Source')}
+            </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', width: '100%', overflow: 'hidden' }}>
               <AmmoTypeLabel ammoType={ammoType} lang={lang} />
               <span className="tag-badge grouped" style={{ flexShrink: 0 }}>
-                {tags.map(t => t.replace('God', '')).join(', ')}
+                {Array.from(allTags).map(t => t.replace('God', '')).join(', ')}
               </span>
+              {variantCount > 2 && (
+                <span className="variant-badge">
+                  {variantCount} {lang === 'de' ? 'Varianten' : 'Variants'}
+                </span>
+              )}
             </div>
           </div>
         </div>

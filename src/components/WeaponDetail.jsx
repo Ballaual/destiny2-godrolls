@@ -3,6 +3,40 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { AppContext } from '../App';
 import { AmmoTypeLabel } from './GodRollCard';
 
+/**
+ * Reconstructs a 5-column layout from a flat list of perks using manifest types.
+ */
+const reconstructPerkColumns = (perkHashes, manifest) => {
+  const columns = [[], [], [], [], []];
+  const seen = new Set();
+
+  perkHashes.forEach(hash => {
+    if (seen.has(hash)) return;
+    seen.add(hash);
+
+    const data = manifest[hash] || {};
+    const type = (data.itemTypeDisplayName || "").toLowerCase();
+
+    if (type.includes("barrel") || type.includes("sight") || type.includes("scope") || type.includes("frame") || type.includes("intrinsic") || type.includes("arrow") || type.includes("haft")) {
+      columns[0].push(hash);
+    } else if (type.includes("magazine") || type.includes("battery") || type.includes("guard") || type.includes("arrow shaft")) {
+      columns[1].push(hash);
+    } else if (type.includes("trait")) {
+      if (columns[2].length === 0) {
+        columns[2].push(hash);
+      } else if (columns[3].length === 0) {
+        columns[3].push(hash);
+      } else {
+        columns[3].push(hash);
+      }
+    } else {
+      columns[4].push(hash);
+    }
+  });
+
+  return columns;
+};
+
 const WeaponDetail = () => {
   const { lang, id } = useParams();
   const navigate = useNavigate();
@@ -68,9 +102,9 @@ const WeaponDetail = () => {
             {weaponType && <span className="weapon-type">{weaponType}</span>}
             <AmmoTypeLabel ammoType={ammoType} lang={lang} />
           </div>
-          <p style={{ margin: '0.5rem 0', color: 'var(--text-main)', fontSize: '0.9rem', fontStyle: 'italic'}}>
-             {lang === 'de' ? 'Quelle: ' : 'Source: '} 
-             {source ? source : (lang === 'de' ? 'unbekannt' : 'unknown')}
+          <p className="weapon-source-aggregator">
+             {lang === 'de' ? 'Quellen: ' : 'Sources: '} 
+             {weaponGroup.sources?.[lang]?.length > 0 ? weaponGroup.sources[lang].join(', ') : (lang === 'de' ? 'unbekannt' : 'unknown')}
           </p>
           {description && <p className="weapon-lore">"{description}"</p>}
         </div>
@@ -84,23 +118,26 @@ const WeaponDetail = () => {
         return (
           <div key={idx} className="detail-rolls-section">
             <h2 className={`roll-title ${rollType}`}>
-               {rollType} God Roll
+               {rollType} God Roll {rollItem.notes ? `(${rollItem.notes})` : ''}
             </h2>
             <div className="perks-grid detailed-grid">
-              {rollItem.plugs && rollItem.plugs.map((plugCol, colIndex) => {
-                const seenPerkNames = new Set();
-                const uniquePlugs = [];
-                plugCol.forEach(plugHash => {
-                  const pData = manifestLangData[plugHash] || { name: 'Unknown' };
-                  if (!seenPerkNames.has(pData.name)) {
-                     seenPerkNames.add(pData.name);
-                     uniquePlugs.push(plugHash);
-                  }
-                });
+              {(() => {
+                const plugs2D = Array.isArray(rollItem.plugs[0]) ? rollItem.plugs : reconstructPerkColumns(rollItem.plugs, manifestLangData);
                 
-                return (
-                  <div key={colIndex} className="perk-column detailed">
-                    {uniquePlugs.map((plugHash, plugIdx) => {
+                return plugs2D.map((plugCol, colIndex) => {
+                  const seenPerkNames = new Set();
+                  const uniquePlugs = [];
+                  plugCol.forEach(plugHash => {
+                    const pData = manifestLangData[plugHash] || { name: 'Unknown' };
+                    if (!seenPerkNames.has(pData.name)) {
+                       seenPerkNames.add(pData.name);
+                       uniquePlugs.push(plugHash);
+                    }
+                  });
+                  
+                  return (
+                    <div key={colIndex} className="perk-column detailed">
+                      {uniquePlugs.map((plugHash, plugIdx) => {
                       const perkData = manifestLangData[plugHash] || { name: `Unknown`, description: '' };
                       const isFirst = plugIdx === 0;
                       return (
@@ -119,11 +156,12 @@ const WeaponDetail = () => {
                     })}
                   </div>
                 );
-              })}
-            </div>
+              })
+            })()}
           </div>
-        )
-      })}
+        </div>
+      );
+    })}
     </div>
   );
 };

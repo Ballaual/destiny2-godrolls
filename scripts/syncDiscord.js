@@ -206,12 +206,14 @@ async function runDiscordSync() {
         weapon.hashes.forEach(h => {
             const d = manifestData.de[h] || {};
             const e = manifestData.en[h] || {};
+            // Use the max version of THIS hash (if available) for sorting individual sources
             const score = getVersionScore(d.traitIds || e.traitIds);
 
             if (d.source) d.source.split(/,| und | and /).forEach(s => {
                 const trimmed = s.trim().replace(/^"|"$/g, '');
                 if (trimmed) {
                     const existing = sourcesWithMaxScoreDe.get(trimmed) || 0;
+                    // Use >= to ensure even score 0 sources are added
                     if (score >= existing) sourcesWithMaxScoreDe.set(trimmed, score);
                 }
             });

@@ -120,8 +120,8 @@ function App() {
                 
                 individualSources.forEach(s => {
                   const currentMax = map.get(s) || 0;
-                  if (traitVersion > currentMax) {
-                    map.set(s, traitVersion);
+                  if (currentItemScore >= currentMax) {
+                    map.set(s, currentItemScore);
                   }
                 });
               }
@@ -159,13 +159,19 @@ function App() {
               return 0;
             });
             
-            // Finalize sources list for both languages
+            // Finalize sources list for both languages (Primary source first!)
             group.sources = { en: [], de: [] };
             ['en', 'de'].forEach(l => {
                if (group.sourcesMaps && group.sourcesMaps[l]) {
-                 group.sources[l] = Array.from(group.sourcesMaps[l].entries())
+                 const primarySourceStr = manifestData[l][group.hash]?.source;
+                 const primarySources = primarySourceStr ? primarySourceStr.split(/,| und | and /).map(s => s.trim()).filter(Boolean) : [];
+                 
+                 const otherSources = Array.from(group.sourcesMaps[l].entries())
                    .sort((a, b) => b[1] - a[1])
-                   .map(entry => entry[0]);
+                   .map(entry => entry[0])
+                   .filter(s => !primarySources.includes(s));
+                 
+                 group.sources[l] = [...primarySources, ...otherSources];
                }
             });
           });

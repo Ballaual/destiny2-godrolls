@@ -15,7 +15,7 @@ const reconstructPerkColumns = (perkHashes, manifest) => {
     seen.add(hash);
 
     const data = manifest[hash] || {};
-    const type = (data.itemTypeDisplayName || "").toLowerCase();
+    const type = (data.rawItemType || data.itemTypeDisplayName || "").toLowerCase();
 
     if (type.includes("barrel") || type.includes("sight") || type.includes("scope") || type.includes("frame") || type.includes("intrinsic") || type.includes("arrow") || type.includes("haft")) {
       columns[0].push(hash);
@@ -35,6 +35,16 @@ const reconstructPerkColumns = (perkHashes, manifest) => {
   });
 
   return columns;
+};
+
+const cleanName = (name) => {
+  if (!name) return name;
+  return name
+    .replace(/\(Enhanced\)|\(Verbessert(?:er|e|es)?\)/gi, '')
+    .replace(/\bEnhanced\b|\bVerbessert(?:er|e|es)?\b/gi, '')
+    .replace(/\s*:\s*/g, ' ')
+    .replace(/\s\s+/g, ' ')
+    .trim();
 };
 
 const WeaponDetail = () => {
@@ -113,12 +123,14 @@ const WeaponDetail = () => {
       {childRolls.map((rollItem, idx) => {
         const rollTags = rollItem.tags || [];
         const isPve = rollTags.includes('GodPVE');
-        const rollType = isPve ? 'PVE' : 'PVP';
+        const isPvp = rollTags.includes('GodPVP');
+        const rollTypeClass = isPve ? 'PVE' : isPvp ? 'PVP' : 'neutral';
+        const displayTitle = isPve ? 'PVE God Roll' : isPvp ? 'PVP God Roll' : 'God Roll';
 
         return (
           <div key={idx} className="detail-rolls-section">
-            <h2 className={`roll-title ${rollType}`}>
-              {rollType} God Roll {rollItem.notes ? `(${rollItem.notes})` : ''}
+            <h2 className={`roll-title ${rollTypeClass}`}>
+              {displayTitle} {rollItem.notes ? `(${rollItem.notes})` : ''}
             </h2>
             <div className="perks-grid detailed-grid">
               {(() => {
@@ -135,8 +147,25 @@ const WeaponDetail = () => {
                     }
                   });
 
+                  const firstPlugHash = uniquePlugs[0];
+                  const firstPlugData = manifestLangData[firstPlugHash] || {};
+                  const rawType = (firstPlugData.rawItemType || "").toLowerCase();
+                  let slotName = cleanName(firstPlugData.itemTypeDisplayName) || (lang === 'de' ? `Slot ${colIndex + 1}` : `Slot ${colIndex + 1}`);
+                  
+                  // Detection logic
+                  const lowerName = (firstPlugData.name || "").toLowerCase();
+                  const isMw = lowerName.includes("meisterwerk") || lowerName.includes("masterwork");
+                  const isOrigin = rawType.includes("origin trait");
+
+                  if (isOrigin) {
+                    slotName = firstPlugData.itemTypeDisplayName; // Should be "Ursprungsattribut" or "Origin Trait"
+                  } else if (isMw || colIndex === 4) {
+                    slotName = lang === 'de' ? "Meisterwerk" : "Masterwork";
+                  }
+
                   return (
                     <div key={colIndex} className="perk-column detailed">
+                      <h3 className="column-slot-header">{slotName}</h3>
                       {uniquePlugs.map((plugHash, plugIdx) => {
                         const perkData = manifestLangData[plugHash] || { name: `Unknown`, description: '' };
                         const isFirst = plugIdx === 0;
@@ -148,7 +177,7 @@ const WeaponDetail = () => {
                               </div>
                             )}
                             <div className="perk-text">
-                              <strong>{perkData.name}</strong>
+                              <strong>{cleanName(perkData.name)}</strong>
                               <p>{perkData.description}</p>
                             </div>
                           </div>

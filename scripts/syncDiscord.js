@@ -19,6 +19,16 @@ const MANIFEST_FILE = path.join(__dirname, '../public/destinyData.json');
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+const cleanName = (name) => {
+    if (!name) return name;
+    return name
+        .replace(/\(Enhanced\)|\(Verbessert(?:er|e|es)?\)/gi, '')
+        .replace(/\bEnhanced\b|\bVerbessert(?:er|e|es)?\b/gi, '')
+        .replace(/\s*:\s*/g, ' ')
+        .replace(/\s\s+/g, ' ')
+        .trim();
+};
+
 /**
  * Reconstructs a 5-column layout from a flat list of perks using manifest types.
  */
@@ -31,7 +41,7 @@ function reconstructPerkColumns(perkHashes, manifest) {
         seen.add(hash);
 
         const data = manifest[hash] || {};
-        const type = (data.itemTypeDisplayName || "").toLowerCase();
+        const type = (data.rawItemType || data.itemTypeDisplayName || "").toLowerCase();
 
         if (type.includes("barrel") || type.includes("sight") || type.includes("scope") || type.includes("frame") || type.includes("intrinsic") || type.includes("arrow") || type.includes("haft")) {
             columns[0].push(hash);
@@ -57,14 +67,31 @@ function reconstructPerkColumns(perkHashes, manifest) {
 
 /**
  * Extracts a numeric version score from Destiny 2 release trait IDs.
- * Format: releases.vXXX.Y -> XXX
+ * Accounts for DLC/Season priority to match App.jsx logic.
  */
 function getVersionScore(traitIds) {
     if (!traitIds) return 0;
-    const releaseTrait = traitIds.find(t => t.startsWith('releases.v'));
-    if (!releaseTrait) return 0;
-    const match = releaseTrait.match(/v(\d+)/);
-    return match ? parseInt(match[1]) : 0;
+    
+    let traitVersion = 0;
+    let traitCategoryScore = 0;
+    
+    traitIds.forEach(id => {
+        const match = id.match(/releases\.v(\d+)\.?(\w+)?/);
+        if (match) {
+            const ver = parseInt(match[1]);
+            if (ver > traitVersion) traitVersion = ver;
+            
+            const cat = match[2] || '';
+            let catScore = 0;
+            if (cat === 'dlc') catScore = 3000;
+            else if (cat === 'season') catScore = 2000;
+            else if (cat === 'annual') catScore = 1500;
+            
+            if (catScore > traitCategoryScore) traitCategoryScore = catScore;
+        }
+    });
+
+    return traitCategoryScore + traitVersion;
 }
 
 async function runDiscordSync() {
@@ -226,13 +253,20 @@ async function runDiscordSync() {
             });
         });
 
-        // Convert to sorted arrays (descending by version score)
-        const sortedSourcesDe = Array.from(sourcesWithMaxScoreDe.entries())
+        // Convert to sorted arrays (Primary source from representative variant first!)
+        const primarySourcesDe = (deData.source || "").split(/,| und | and /).map(s => s.trim()).filter(Boolean);
+        const otherSourcesDe = Array.from(sourcesWithMaxScoreDe.entries())
             .sort((a, b) => b[1] - a[1])
-            .map(entry => entry[0]);
-        const sortedSourcesEn = Array.from(sourcesWithMaxScoreEn.entries())
+            .map(entry => entry[0])
+            .filter(s => !primarySourcesDe.includes(s));
+        const sortedSourcesDe = [...primarySourcesDe, ...otherSourcesDe];
+
+        const primarySourcesEn = (enData.source || "").split(/,| and | und /).map(s => s.trim()).filter(Boolean);
+        const otherSourcesEn = Array.from(sourcesWithMaxScoreEn.entries())
             .sort((a, b) => b[1] - a[1])
-            .map(entry => entry[0]);
+            .map(entry => entry[0])
+            .filter(s => !primarySourcesEn.includes(s));
+        const sortedSourcesEn = [...primarySourcesEn, ...otherSourcesEn];
 
         const sourceTagsDe = sortedSourcesDe.map(s => `<span class="source-tag">🎯 ${s}</span>`).join(' ');
         const sourceTagsEn = sortedSourcesEn.map(s => `<span class="source-tag">🎯 ${s}</span>`).join(' ');
@@ -259,8 +293,8 @@ async function runDiscordSync() {
            let rNameEn = (r.tags && r.tags.includes("GodPVE")) ? "PVE God Roll" : (r.tags && r.tags.includes("GodPVP")) ? "PVP God Roll" : "God Roll";
            
            if (r.notes) {
-               rNameDe += ` (${r.notes})`;
-               rNameEn += ` (${r.notes})`;
+               rNameDe += ` (${cleanName(r.notes)})`;
+               rNameEn += ` (${cleanName(r.notes)})`;
            }
 
            let titleColor = rNameDe.includes("PVE") ? "#06b6d4" : rNameDe.includes("PVP") ? "#ef4444" : "#fbbf24";
@@ -279,21 +313,28 @@ async function runDiscordSync() {
                 const perkDeData = manifestData.de[firstPlug] || {};
                 const perkEnData = manifestData.en[firstPlug] || {};
                 
-                let slotTypeDe = perkDeData.itemTypeDisplayName;
-                let slotTypeEn = perkEnData.itemTypeDisplayName;
-                
-                const lowerNameDe = (perkDeData.name || "").toLowerCase();
-                const lowerNameEn = (perkEnData.name || "").toLowerCase();
-
-                const isMwDe = lowerNameDe.includes("meisterwerk") || lowerNameDe.includes("masterwork");
-                const isMwEn = lowerNameEn.includes("masterwork") || lowerNameEn.includes("meisterwerk");
-
-                if (isMwDe || idx === 5) {
-                    slotTypeDe = slotTypeDe || "Meisterwerk";
-                }
-                if (isMwEn || idx === 5) {
-                    slotTypeEn = slotTypeEn || "Masterwork";
-                }
+                 const rawType = (perkEnData.rawItemType || "").toLowerCase();
+                 let slotTypeDe = cleanName(perkDeData.itemTypeDisplayName);
+                 let slotTypeEn = cleanName(perkEnData.itemTypeDisplayName);
+                 
+                 const lowerNameDe = (perkDeData.name || "").toLowerCase();
+                 const lowerNameEn = (perkEnData.name || "").toLowerCase();
+ 
+                 const isMwDe = lowerNameDe.includes("meisterwerk") || lowerNameDe.includes("masterwork");
+                 const isMwEn = lowerNameEn.includes("masterwork") || lowerNameEn.includes("meisterwerk");
+                 const isOrigin = rawType.includes("origin trait");
+ 
+                 if (isOrigin) {
+                     slotTypeDe = perkDeData.itemTypeDisplayName; // e.g. "Ursprungsattribut"
+                     slotTypeEn = perkEnData.itemTypeDisplayName; // e.g. "Origin Trait"
+                 } else {
+                     if (isMwDe || idx === 4) {
+                         slotTypeDe = "Meisterwerk";
+                     }
+                     if (isMwEn || idx === 4) {
+                         slotTypeEn = "Masterwork";
+                     }
+                 }
 
                 slotTypeDe = slotTypeDe || `Slot ${idx+1}`;
                 slotTypeEn = slotTypeEn || `Slot ${idx+1}`;
@@ -309,8 +350,8 @@ async function runDiscordSync() {
                let seenPerks = new Set();
                let isFirst = true;
                col.forEach(plugHash => {
-                   let nameDe = manifestData.de[plugHash]?.name;
-                   let nameEn = manifestData.en[plugHash]?.name;
+                   let nameDe = cleanName(manifestData.de[plugHash]?.name);
+                   let nameEn = cleanName(manifestData.en[plugHash]?.name);
                    // Use en as fallback if de name is missing
                    if (!nameDe && nameEn) nameDe = nameEn;
                    if (!nameDe || seenPerks.has(nameDe)) return;
@@ -425,26 +466,58 @@ async function runDiscordSync() {
         const elEn = await page.$('#capture-en');
         const bufferEn = await elEn.screenshot();
 
-        // CREATE FORMDATA PAYLOAD FOR FORUM WEBHOOK
+        // Download Hero Image to send as attachment (no link)
+        let bufferHero = null;
+        if (screenshot) {
+            try {
+                const resHeroImg = await fetch(screenshot);
+                if (resHeroImg.ok) {
+                    bufferHero = Buffer.from(await resHeroImg.arrayBuffer());
+                }
+            } catch (e) {
+                console.log(`Failed to download hero image for ${threadTitle}`);
+            }
+        }
+
+        // --- PREPARE DISCORD MESSAGES ---
         const isPatch = (cached && cached.thread_id);
 
-        const deText = `${deName}`;
-        const enText = `${enName}`;
+        // 1. HERO MESSAGE (Thread starter or Main Message)
+        const formHero = new FormData();
+        const payloadHero = {
+            content: "",
+            username: "Destiny 2 God Rolls",
+            avatar_url: icon
+        };
+        if (!isPatch) {
+            payloadHero.thread_name = threadTitle;
+        }
 
+        if (bufferHero) {
+            formHero.append('files[0]', new Blob([bufferHero]), 'hero.jpg');
+            payloadHero.attachments = [{ id: 0, filename: 'hero.jpg' }];
+        } else if (screenshot) {
+            payloadHero.content = screenshot; // Fallback
+        }
+
+        formHero.append('payload_json', JSON.stringify(payloadHero));
+
+        // 2. DE MESSAGE
         const formDe = new FormData();
         formDe.append('files[0]', new Blob([bufferDe], { type: 'image/png' }), 'de_godroll.png');
-        const payloadDe = { content: deText, attachments: [{ id: 0, filename: 'de_godroll.png' }] };
-        if (!isPatch) {
-            payloadDe.thread_name = threadTitle;
-            payloadDe.username = "Destiny 2 God Rolls";
-            payloadDe.avatar_url = icon;
-        }
+        const payloadDe = { 
+            content: `DE: ${deName}`, 
+            attachments: [{ id: 0, filename: 'de_godroll.png' }],
+            username: "Destiny 2 God Rolls",
+            avatar_url: icon
+        };
         formDe.append('payload_json', JSON.stringify(payloadDe));
 
+        // 3. EN MESSAGE
         const formEn = new FormData();
         formEn.append('files[0]', new Blob([bufferEn], { type: 'image/png' }), 'en_godroll.png');
         const payloadEn = { 
-            content: enText, 
+            content: `EN: ${enName}`, 
             attachments: [{ id: 0, filename: 'en_godroll.png' }],
             username: "Destiny 2 God Rolls",
             avatar_url: icon
@@ -454,61 +527,87 @@ async function runDiscordSync() {
         // Fire to Discord API
         try {
             if (isPatch) {
-                // PATCH MAIN MESSAGE (DE)
-                const patchUrlDe = `${WEBHOOK_URL}/messages/${cached.thread_id}?thread_id=${cached.thread_id}&wait=true`;
-                let resDe = await fetch(patchUrlDe, { method: 'PATCH', body: formDe });
-                
-                // PATCH REPLY (EN)
-                if (cached.en_message_id) {
-                    const patchUrlEn = `${WEBHOOK_URL}/messages/${cached.en_message_id}?thread_id=${cached.thread_id}&wait=true`;
-                    await fetch(patchUrlEn, { method: 'PATCH', body: formEn });
+                const threadId = cached.thread_id;
+                console.log(`[UPDATING] ${threadTitle}`);
+
+                // A. Patch Hero Message (Master Message)
+                const patchUrlHero = `${WEBHOOK_URL}/messages/${threadId}?thread_id=${threadId}&wait=true`;
+                await fetch(patchUrlHero, { method: 'PATCH', body: formHero });
+
+                // B. Patch or Post German Message
+                let deMsgId = cached.de_message_id;
+                if (deMsgId) {
+                    const patchUrlDe = `${WEBHOOK_URL}/messages/${deMsgId}?thread_id=${threadId}&wait=true`;
+                    await fetch(patchUrlDe, { method: 'PATCH', body: formDe });
                 } else {
-                    // Fallback: If for some reason the en_message_id didn't save, post a new reply
-                    const postReplyUrl = `${WEBHOOK_URL}?thread_id=${cached.thread_id}&wait=true`;
-                    let resEn = await fetch(postReplyUrl, { method: 'POST', body: formEn });
-                    let resEnJson = await resEn.json();
-                    discordState[weapon.hash].en_message_id = resEnJson.id;
-                }
-                
-                if (resDe.ok) {
-                    discordState[weapon.hash].hash = currentHash;
-                    console.log(`[PATCHED SEQUENTIAL] ${threadTitle}`);
-                    fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true });
-                    await fs.promises.writeFile(STATE_FILE, JSON.stringify(discordState, null, 2));
-                    patchedCount++;
+                    // Migration: If no deMsgId, it means old thread where Hero was DE.
+                    // We just posted Hero info over the old DE message, so we NEED to post DE now.
+                    const postUrlDe = `${WEBHOOK_URL}?thread_id=${threadId}&wait=true`;
+                    let resDe = await fetch(postUrlDe, { method: 'POST', body: formDe });
+                    let resDeJson = await resDe.json();
+                    deMsgId = resDeJson.id;
                 }
 
-            } else {
-                // POST MAIN MESSAGE (CREATES THREAD)
-                const postUrlDe = `${WEBHOOK_URL}?wait=true`;
-                let resDe = await fetch(postUrlDe, { method: 'POST', body: formDe });
+                // C. Patch or Post English Message
+                let enMsgId = cached.en_message_id;
+                if (enMsgId) {
+                    const patchUrlEn = `${WEBHOOK_URL}/messages/${enMsgId}?thread_id=${threadId}&wait=true`;
+                    await fetch(patchUrlEn, { method: 'PATCH', body: formEn });
+                } else {
+                    const postUrlEn = `${WEBHOOK_URL}?thread_id=${threadId}&wait=true`;
+                    let resEn = await fetch(postUrlEn, { method: 'POST', body: formEn });
+                    let resEnJson = await resEn.json();
+                    enMsgId = resEnJson.id;
+                }
                 
-                if (resDe.ok) {
-                    const resDeJson = await resDe.json();
-                    const createdThreadId = resDeJson.channel_id || resDeJson.id;
+                discordState[weapon.hash] = {
+                    thread_id: threadId,
+                    de_message_id: deMsgId,
+                    en_message_id: enMsgId,
+                    hash: currentHash
+                };
+                patchedCount++;
+
+            } else {
+                // NEW THREAD
+                console.log(`[POSTING NEW] ${threadTitle}`);
+                
+                // 1. Post Hero -> Creates Thread
+                const postUrlHero = `${WEBHOOK_URL}?wait=true`;
+                let resHero = await fetch(postUrlHero, { method: 'POST', body: formHero });
+                
+                if (resHero.ok) {
+                    const resHeroJson = await resHero.json();
+                    const createdThreadId = resHeroJson.channel_id || resHeroJson.id;
                     
-                    // POST REPLY (EN)
-                    const postReplyUrl = `${WEBHOOK_URL}?thread_id=${createdThreadId}&wait=true`;
-                    let resEn = await fetch(postReplyUrl, { method: 'POST', body: formEn });
+                    // 2. Post DE Reply
+                    const postUrlDe = `${WEBHOOK_URL}?thread_id=${createdThreadId}&wait=true`;
+                    let resDe = await fetch(postUrlDe, { method: 'POST', body: formDe });
+                    const resDeJson = await resDe.json();
+
+                    // 3. Post EN Reply
+                    const postUrlEn = `${WEBHOOK_URL}?thread_id=${createdThreadId}&wait=true`;
+                    let resEn = await fetch(postUrlEn, { method: 'POST', body: formEn });
                     const resEnJson = await resEn.json();
 
                     discordState[weapon.hash] = {
                         thread_id: createdThreadId,
+                        de_message_id: resDeJson.id,
                         en_message_id: resEnJson.id,
                         hash: currentHash
                     };
-                    
-                    console.log(`[POSTED SEQUENTIAL NEW] ${threadTitle}`);
-                    fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true });
-                    await fs.promises.writeFile(STATE_FILE, JSON.stringify(discordState, null, 2));
                     postedCount++;
-                } else if (resDe.status === 429) {
+                } else if (resHero.status === 429) {
                     console.log("Rate Limited by Discord! Sleeping for 10 seconds...");
                     await sleep(10000);
-                } else {
-                    console.error(`Error posting ${threadTitle}:`, resDe.status, await resDe.text());
+                    continue;
                 }
             }
+
+            // Save state immediately after success
+            fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true });
+            await fs.promises.writeFile(STATE_FILE, JSON.stringify(discordState, null, 2));
+
             await sleep(1500); 
         } catch (err) {
             console.error("Fetch Network Error:", err);

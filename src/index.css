@@ -7,10 +7,12 @@
   --border-light: rgba(255, 255, 255, 0.1);
   --text-main: #e2e8f0;
   --text-muted: #94a3b8;
-  --accent-pve: #38bdf8;
-  --accent-pvp: #fb923c;
-  --glow-pve: rgba(56, 189, 248, 0.3);
-  --glow-pvp: rgba(251, 146, 60, 0.3);
+  --accent-pve: #06b6d4;
+  --accent-pvp: #ef4444;
+  --accent-neutral: #fbbf24;
+  --glow-pve: rgba(6, 182, 212, 0.3);
+  --glow-pvp: rgba(239, 68, 68, 0.3);
+  --glow-neutral: rgba(251, 191, 36, 0.3);
   --font-main: 'Outfit', sans-serif;
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -586,10 +588,32 @@ body {
 
 .roll-title.PVE {
   color: var(--accent-pve);
+  text-shadow: 0 0 15px var(--glow-pve);
 }
 
 .roll-title.PVP {
   color: var(--accent-pvp);
+  text-shadow: 0 0 15px var(--glow-pvp);
+}
+
+.roll-title.neutral {
+  color: var(--accent-neutral);
+  text-shadow: 0 0 15px var(--glow-neutral);
+}
+
+.column-slot-header {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .perks-grid.detailed-grid {

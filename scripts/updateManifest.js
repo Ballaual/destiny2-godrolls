@@ -17,6 +17,16 @@ if (!GODROLL_DATABASE_URL) throw new Error("Missing VITE_GODROLL_DATABASE_URL in
 const MANIFEST_URL = 'https://www.bungie.net/Platform/Destiny2/Manifest/';
 const BUNGIE_BASE = 'https://www.bungie.net';
 
+const cleanName = (name) => {
+    if (!name) return name;
+    return name
+        .replace(/\(Enhanced\)|\(Verbessert(?:er|e|es)?\)/gi, '')
+        .replace(/\bEnhanced\b|\bVerbessert(?:er|e|es)?\b/gi, '')
+        .replace(/\s*:\s*/g, ' ')
+        .replace(/\s\s+/g, ' ')
+        .trim();
+};
+
 async function fetchLanguageSubset(langCode, hashes, manifestMeta, itemsEN = null) {
     const itemDefPath = manifestMeta.Response.jsonWorldComponentContentPaths[langCode].DestinyInventoryItemDefinition;
     const collDefPath = manifestMeta.Response.jsonWorldComponentContentPaths[langCode].DestinyCollectibleDefinition;
@@ -76,6 +86,8 @@ async function fetchLanguageSubset(langCode, hashes, manifestMeta, itemsEN = nul
 
     for (const hash of hashes) {
         const item = itemDefs[hash];
+        const enItem = itemDefsEN ? itemDefsEN[hash] : item;
+        
         if (item) {
             let sourceStr = null;
             
@@ -93,22 +105,33 @@ async function fetchLanguageSubset(langCode, hashes, manifestMeta, itemsEN = nul
 
             // C. FALLBACK 2: Try nameFallbackMap (last resort, keyed by English name)
             if (!sourceStr) {
-                const enItem = itemDefsEN ? itemDefsEN[hash] : item;
-                const enName = enItem?.displayProperties?.name;
-                if (enName) {
-                    const canonicalBaseName = enName.replace(/\s*\(Adept\)|\s*\(Harrowed\)|\s*\(Timelost\)|\s*\(Baroque\)|\s*\(Shiny\)/g, '').trim();
+                const itemEnName = enItem?.displayProperties?.name;
+                if (itemEnName) {
+                    const canonicalBaseName = itemEnName.replace(/\s*\(Adept\)|\s*\(Harrowed\)|\s*\(Timelost\)|\s*\(Baroque\)|\s*\(Shiny\)/g, '').trim();
                     if (nameFallbackMap.has(canonicalBaseName)) {
                         sourceStr = nameFallbackMap.get(canonicalBaseName);
                     }
                 }
             }
+
+            let displayType = item.itemTypeDisplayName || "";
+            const rawType = enItem?.itemTypeDisplayName || displayType;
+
+            // Standardize German Trait terminology
+            if (langCode === 'de' && rawType.toLowerCase().includes('trait')) {
+                const lowerDisplay = displayType.toLowerCase();
+                if (lowerDisplay.includes('attribut') || lowerDisplay.includes('eigenschaft')) {
+                    displayType = rawType.toLowerCase().includes('origin') ? 'Ursprungsattribut' : 'Eigenschaft';
+                }
+            }
             
             subset[hash] = {
-                name: item.displayProperties?.name || "Unknown",
+                name: cleanName(item.displayProperties?.name || "Unknown"),
                 description: item.flavorText || item.displayProperties?.description || "",
                 icon: item.displayProperties?.icon ? `${BUNGIE_BASE}${item.displayProperties.icon}` : null,
                 screenshot: item.screenshot ? `${BUNGIE_BASE}${item.screenshot}` : null,
-                itemTypeDisplayName: item.itemTypeDisplayName,
+                itemTypeDisplayName: cleanName(displayType),
+                rawItemType: rawType,
                 equippingBlock: item.equippingBlock ? { ammoType: item.equippingBlock.ammoType } : null,
                 source: sourceStr,
                 traitIds: item.traitIds || []

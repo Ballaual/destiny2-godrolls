@@ -55,7 +55,21 @@ function reconstructPerkColumns(perkHashes, manifest) {
     return columns;
 }
 
+/**
+ * Extracts a numeric version score from Destiny 2 release trait IDs.
+ * Format: releases.vXXX.Y -> XXX
+ */
+function getVersionScore(traitIds) {
+    if (!traitIds) return 0;
+    const releaseTrait = traitIds.find(t => t.startsWith('releases.v'));
+    if (!releaseTrait) return 0;
+    const match = releaseTrait.match(/v(\d+)/);
+    return match ? parseInt(match[1]) : 0;
+}
+
 async function runDiscordSync() {
+    const targetSearch = process.argv[2];
+
     console.log("Loading Local Manifest...");
     if (!fs.existsSync(MANIFEST_FILE)) {
         console.error("No destinyData.json found! Run 'npm run sync' first.");
@@ -91,19 +105,38 @@ async function runDiscordSync() {
                 id: rawHash.toString(),
                 baseName,
                 hash: rawHash,
+                hashes: new Set(),
                 tags: new Set(),
                 rolls: []
             });
         }
         
         const weaponGroup = groupedMap.get(baseName);
-        const isCurrentAdept = manifestData.en[weaponGroup.hash]?.name.includes('(Adept)');
-        const isThisAdept = rawName.includes('(Adept)');
+        weaponGroup.hashes.add(rawHash);
         
-        if (isCurrentAdept && !isThisAdept) {
+        // Pick the newest version as representative. If same version, pick Adept.
+        const currentRef = manifestData.en[weaponGroup.hash] || {};
+        const thisRef = manifestData.en[rawHash] || {};
+        
+        const currentScore = getVersionScore(currentRef.traitIds);
+        const thisScore = getVersionScore(thisRef.traitIds);
+        const currentIsAdept = (currentRef.name || "").includes("(Adept)");
+        const thisIsAdept = (thisRef.name || "").includes("(Adept)");
+
+        let shouldSwap = false;
+        if (thisScore > currentScore) {
+            shouldSwap = true;
+        } else if (thisScore === currentScore) {
+            if (thisIsAdept && !currentIsAdept) {
+                shouldSwap = true;
+            }
+        }
+
+        if (shouldSwap) {
             weaponGroup.hash = rawHash;
             weaponGroup.id = rawHash.toString();
         }
+
         roll.tags?.forEach(t => weaponGroup.tags.add(t));
         
         const normalizedRoll = {
@@ -119,8 +152,28 @@ async function runDiscordSync() {
             weaponGroup.rolls.push(normalizedRoll);
         }
     });
+    
+    // Final Roll Sorting inside each weapon group (Newest version first)
+    groupedMap.forEach(group => {
+        group.rolls.sort((a, b) => {
+            const dataA = manifestData.en[a.hash] || {};
+            const dataB = manifestData.en[b.hash] || {};
+            const scoreA = getVersionScore(dataA.traitIds);
+            const scoreB = getVersionScore(dataB.traitIds);
+            return scoreB - scoreA;
+        });
+    });
 
-    const finalWeapons = Array.from(groupedMap.values());
+    let finalWeapons = Array.from(groupedMap.values());
+    
+    if (targetSearch) {
+        finalWeapons = finalWeapons.filter(w => 
+            w.baseName.toLowerCase().includes(targetSearch.toLowerCase()) || 
+            w.hash.toString() === targetSearch
+        );
+        console.log(`Filtering for "${targetSearch}": Found ${finalWeapons.length} matching weapons.`);
+    }
+
     console.log(`Checking ${finalWeapons.length} grouped weapons to sync to Discord...`);
 
     console.log("Starting Puppeteer engine for Image Generation...");
@@ -130,7 +183,7 @@ async function runDiscordSync() {
     });
     const page = await browser.newPage();
     // Vastly increased width to avoid clipping the 5 columns, high deviceScaleFactor for crispness!
-    await page.setViewport({ width: 1250, height: 3000, deviceScaleFactor: 2 }); 
+    await page.setViewport({ width: 1450, height: 3000, deviceScaleFactor: 2 }); 
 
     let postedCount = 0;
     let patchedCount = 0;
@@ -145,7 +198,42 @@ async function runDiscordSync() {
         const screenshot = enData.screenshot;
         const icon = enData.icon;
         let flavorText = deData.description || enData.description || "";
-        let sourceTxt = deData.source || enData.source || "Quelle unbekannt";
+        
+        // AGGREGATE SOURCES FROM ALL VARIANTS, SORTED BY NEWEST VERSION
+        const sourcesWithMaxScoreDe = new Map(); // source -> maxVersionScore
+        const sourcesWithMaxScoreEn = new Map(); // source -> maxVersionScore
+        
+        weapon.hashes.forEach(h => {
+            const d = manifestData.de[h] || {};
+            const e = manifestData.en[h] || {};
+            const score = getVersionScore(d.traitIds || e.traitIds);
+
+            if (d.source) d.source.split(/,| und | and /).forEach(s => {
+                const trimmed = s.trim().replace(/^"|"$/g, '');
+                if (trimmed) {
+                    const existing = sourcesWithMaxScoreDe.get(trimmed) || 0;
+                    if (score >= existing) sourcesWithMaxScoreDe.set(trimmed, score);
+                }
+            });
+            if (e.source) e.source.split(/,| and | und /).forEach(s => {
+                const trimmed = s.trim().replace(/^"|"$/g, '');
+                if (trimmed) {
+                    const existing = sourcesWithMaxScoreEn.get(trimmed) || 0;
+                    if (score >= existing) sourcesWithMaxScoreEn.set(trimmed, score);
+                }
+            });
+        });
+
+        // Convert to sorted arrays (descending by version score)
+        const sortedSourcesDe = Array.from(sourcesWithMaxScoreDe.entries())
+            .sort((a, b) => b[1] - a[1])
+            .map(entry => entry[0]);
+        const sortedSourcesEn = Array.from(sourcesWithMaxScoreEn.entries())
+            .sort((a, b) => b[1] - a[1])
+            .map(entry => entry[0]);
+
+        const sourceTagsDe = sortedSourcesDe.map(s => `<span class="source-tag">🎯 ${s}</span>`).join(' ');
+        const sourceTagsEn = sortedSourcesEn.map(s => `<span class="source-tag">🎯 ${s}</span>`).join(' ');
         
         const threadTitle = deName !== enName ? `${deName} / ${enName}` : deName;
 
@@ -186,10 +274,27 @@ async function runDiscordSync() {
 
            plugs2D.forEach((col, idx) => {
                const firstPlug = col[0];
-               const perkDeData = manifestData.de[firstPlug] || {};
-               const perkEnData = manifestData.en[firstPlug] || {};
-               const slotTypeDe = perkDeData.itemTypeDisplayName || `Slot ${idx+1}`;
-               const slotTypeEn = perkEnData.itemTypeDisplayName || `Slot ${idx+1}`;
+                const perkDeData = manifestData.de[firstPlug] || {};
+                const perkEnData = manifestData.en[firstPlug] || {};
+                
+                let slotTypeDe = perkDeData.itemTypeDisplayName;
+                let slotTypeEn = perkEnData.itemTypeDisplayName;
+                
+                const lowerNameDe = (perkDeData.name || "").toLowerCase();
+                const lowerNameEn = (perkEnData.name || "").toLowerCase();
+
+                const isMwDe = lowerNameDe.includes("meisterwerk") || lowerNameDe.includes("masterwork");
+                const isMwEn = lowerNameEn.includes("masterwork") || lowerNameEn.includes("meisterwerk");
+
+                if (isMwDe || idx === 5) {
+                    slotTypeDe = slotTypeDe || "Meisterwerk";
+                }
+                if (isMwEn || idx === 5) {
+                    slotTypeEn = slotTypeEn || "Masterwork";
+                }
+
+                slotTypeDe = slotTypeDe || `Slot ${idx+1}`;
+                slotTypeEn = slotTypeEn || `Slot ${idx+1}`;
 
                // DE Column
                deRollsHtml += `<div style="flex: 1; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 12px; box-shadow: inset 0 4px 20px rgba(0,0,0,0.2);">`;
@@ -255,7 +360,7 @@ async function runDiscordSync() {
                 * { box-sizing: border-box; }
                 body { font-family: 'Inter', sans-serif; margin: 0; padding: 20px; background: #000; }
                 
-                .container { background-color: #050a14; color: white; border-radius: 16px; overflow: hidden; width: 1200px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; background-size: 100% auto; background-position: center -80px; background-repeat: no-repeat; position: relative; }
+                .container { background-color: #050a14; color: white; border-radius: 16px; overflow: hidden; width: 1400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; background-size: 100% auto; background-position: center -80px; background-repeat: no-repeat; position: relative; }
                 .hero { height: 450px; position: relative; }
                 .hero-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(15,23,42,0.85) 100%); padding: 30px 24px 20px 24px; display: flex; align-items: flex-end; gap: 20px; }
                 .hero-overlay img { width: 84px; height: 84px; border-radius: 12px; border: 3px solid rgba(255,255,255,0.8); box-shadow: 0 4px 12px rgba(0,0,0,0.8); }
@@ -274,7 +379,7 @@ async function runDiscordSync() {
                         <div>
                             <h1>${deName}</h1>
                             <p>${flavorText}</p>
-                            <span class="source-tag">🎯 Quelle: ${sourceTxt}</span>
+                            ${sourceTagsDe || '<span class="source-tag">🎯 Quelle unbekannt</span>'}
                         </div>
                     </div>
                 </div>
@@ -291,7 +396,7 @@ async function runDiscordSync() {
                         <div>
                             <h1>${enName}</h1>
                             <p>${enData.description || flavorText}</p>
-                            <span class="source-tag">🎯 Source: ${enData.source || "Source unknown"}</span>
+                            ${sourceTagsEn || '<span class="source-tag">🎯 Source unknown</span>'}
                         </div>
                     </div>
                 </div>
@@ -366,6 +471,7 @@ async function runDiscordSync() {
                 if (resDe.ok) {
                     discordState[weapon.hash].hash = currentHash;
                     console.log(`[PATCHED SEQUENTIAL] ${threadTitle}`);
+                    fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true });
                     await fs.promises.writeFile(STATE_FILE, JSON.stringify(discordState, null, 2));
                     patchedCount++;
                 }
@@ -391,6 +497,7 @@ async function runDiscordSync() {
                     };
                     
                     console.log(`[POSTED SEQUENTIAL NEW] ${threadTitle}`);
+                    fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true });
                     await fs.promises.writeFile(STATE_FILE, JSON.stringify(discordState, null, 2));
                     postedCount++;
                 } else if (resDe.status === 429) {

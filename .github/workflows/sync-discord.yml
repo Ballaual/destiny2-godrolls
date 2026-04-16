@@ -20,30 +20,28 @@ jobs:
       - name: Check for Godroll Database updates (Watchdog)
         id: watchdog
         run: |
-          # Wenn manuell gestartet (dispatch), erzwingen wir den Lauf
-          if [[ "${{ github.event_name }}" != "schedule" ]]; then
-            echo "FORCE_RUN=true" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
           URL="${{ secrets.GODROLL_DATABASE_URL }}"
           HASH_FILE="data/godroll_database_hash.txt"
           
-          # Sicherstellen dass die Datei existiert
+          # Sicherstellen dass Verzeichnis und Datei existieren
+          mkdir -p data
           touch $HASH_FILE
           OLD_HASH=$(cat $HASH_FILE)
           
           # Aktuellen Hash von der URL holen
           NEW_HASH=$(curl -sL "$URL" | md5sum | cut -d' ' -f1)
           
-          if [ "$OLD_HASH" != "$NEW_HASH" ]; then
-            echo "Changes detected in Godroll Database! Proceeding with sync..."
-            echo "$NEW_HASH" > $HASH_FILE
+          # Status-Check: Ist es ein automatischer Lauf oder eine manuelle Anforderung?
+          if [ "$OLD_HASH" != "$NEW_HASH" ] || [[ "${{ github.event_name }}" != "schedule" ]]; then
+            echo "Changes detected or manual trigger! Proceeding with sync..."
             echo "FORCE_RUN=true" >> $GITHUB_OUTPUT
           else
             echo "No changes in Godroll Database JSON. Skipping rendering."
             echo "FORCE_RUN=false" >> $GITHUB_OUTPUT
           fi
+          
+          # Hash-Datei immer aktualisieren, damit der Stand synchron bleibt
+          echo "$NEW_HASH" > $HASH_FILE
 
       - name: Setup Node.js
         if: steps.watchdog.outputs.FORCE_RUN == 'true'
@@ -69,4 +67,5 @@ jobs:
           git config --global user.email "actions@github.com"
           git add -f data/discordState.json data/godroll_database_hash.txt
           git commit -m "chore(sync): update discord state & godroll database hash [skip ci]" || echo "No changes to commit"
+          git pull --rebase
           git push

@@ -9,7 +9,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "sync": "node --max-old-space-size=4096 scripts/updateManifest.js",
-    "discord-sync": "node scripts/syncDiscord.js"
+    "discord-sync": "node scripts/syncDiscord.js",
+    "start": "node scripts/syncDiscord.js"
   },
   "dependencies": {
     "dotenv": "^17.3.1",

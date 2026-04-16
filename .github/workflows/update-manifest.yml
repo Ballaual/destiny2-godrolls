@@ -6,6 +6,9 @@ on:
     - cron: '30 19 * * 2'
   workflow_dispatch: # Erlaubt manuelles Starten über den GitHub Tab
 
+permissions:
+  contents: write
+
 jobs:
   update-manifest:
     runs-on: ubuntu-latest

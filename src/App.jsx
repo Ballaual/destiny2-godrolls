@@ -110,14 +110,20 @@ function App() {
             // Collect Sources (Multilingual)
             ['en', 'de'].forEach(l => {
               const itemData = manifestData[l][rawHash];
-              const sourceText = itemData?.source;
+              let sourceText = itemData?.source;
               if (sourceText) {
                 if (!weaponGroup.sourcesMaps) weaponGroup.sourcesMaps = { en: new Map(), de: new Map() };
                 const map = weaponGroup.sourcesMaps[l];
-                const currentMax = map.get(sourceText) || 0;
-                if (traitVersion > currentMax) {
-                  map.set(sourceText, traitVersion);
-                }
+                
+                // Split multi-sources (e.g. "Source A, Source B") to handle them individually
+                const individualSources = sourceText.split(/,| und | and /).map(s => s.trim()).filter(Boolean);
+                
+                individualSources.forEach(s => {
+                  const currentMax = map.get(s) || 0;
+                  if (traitVersion > currentMax) {
+                    map.set(s, traitVersion);
+                  }
+                });
               }
             });
 

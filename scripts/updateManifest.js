@@ -17,11 +17,19 @@ if (!GODROLL_DATABASE_URL) throw new Error("Missing VITE_GODROLL_DATABASE_URL in
 const MANIFEST_URL = 'https://www.bungie.net/Platform/Destiny2/Manifest/';
 const BUNGIE_BASE = 'https://www.bungie.net';
 
-async function fetchLanguageSubset(langCode, hashes, manifestMeta) {
+async function fetchLanguageSubset(langCode, hashes, manifestMeta, itemsEN = null) {
     const itemDefPath = manifestMeta.Response.jsonWorldComponentContentPaths[langCode].DestinyInventoryItemDefinition;
     const collDefPath = manifestMeta.Response.jsonWorldComponentContentPaths[langCode].DestinyCollectibleDefinition;
     console.log(`Downloading ${langCode} Definitions...`);
     
+    // Also need EN items if not already provided, to build a canonical name map
+    let itemDefsEN = itemsEN;
+    if (!itemDefsEN && langCode !== 'en') {
+        const enPath = manifestMeta.Response.jsonWorldComponentContentPaths['en'].DestinyInventoryItemDefinition;
+        const res = await fetch(`${BUNGIE_BASE}${enPath}`);
+        itemDefsEN = await res.json();
+    }
+
     const [resItems, resColls] = await Promise.all([
       fetch(`${BUNGIE_BASE}${itemDefPath}`),
       fetch(`${BUNGIE_BASE}${collDefPath}`)
@@ -31,14 +39,68 @@ async function fetchLanguageSubset(langCode, hashes, manifestMeta) {
     const collDefs = await resColls.json();
     
     const subset = {};
+    
+    // 1. Build fallback source maps from the ENTIRE item definitions for this language
+    const collectibleFallbackMap = new Map();
+    const nameFallbackMap = new Map(); // Keyed by English name (canonical)
+    
+    for (const h in itemDefs) {
+        const item = itemDefs[h];
+        if (item.equippingBlock) {
+            // Find the canonical (English) name for this hash
+            const enItem = itemDefsEN ? itemDefsEN[h] : item;
+            const enName = enItem?.displayProperties?.name;
+            
+            if (enName) {
+                const canonicalBaseName = enName.replace(/\s*\(Adept\)|\s*\(Harrowed\)|\s*\(Timelost\)|\s*\(Baroque\)|\s*\(Shiny\)/g, '').trim();
+                
+                if (item.collectibleHash && collDefs[item.collectibleHash]) {
+                    let s = collDefs[item.collectibleHash].sourceString;
+                    if (s) {
+                        if (s.startsWith("Source: ")) s = s.substring(8);
+                        if (s.startsWith("Quelle: ")) s = s.substring(8);
+                        
+                        // Map by collectibleHash (primary)
+                        collectibleFallbackMap.set(item.collectibleHash, s);
+                        
+                        // Also map by English baseName (secondary fallback), prioritizing longer strings
+                        const existingNameSource = nameFallbackMap.get(canonicalBaseName);
+                        if (!existingNameSource || s.length > existingNameSource.length) {
+                            nameFallbackMap.set(canonicalBaseName, s);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     for (const hash of hashes) {
         const item = itemDefs[hash];
         if (item) {
             let sourceStr = null;
+            
+            // A. Specific hash's own collectible
             if (item.collectibleHash && collDefs[item.collectibleHash]) {
                 sourceStr = collDefs[item.collectibleHash].sourceString || null;
                 if (sourceStr && sourceStr.startsWith("Source: ")) sourceStr = sourceStr.substring(8);
                 if (sourceStr && sourceStr.startsWith("Quelle: ")) sourceStr = sourceStr.substring(8);
+            }
+
+            // B. FALLBACK 1: Try collectibleFallbackMap (same collectible but maybe different variant had the string)
+            if (!sourceStr && item.collectibleHash && collectibleFallbackMap.has(item.collectibleHash)) {
+                sourceStr = collectibleFallbackMap.get(item.collectibleHash);
+            }
+
+            // C. FALLBACK 2: Try nameFallbackMap (last resort, keyed by English name)
+            if (!sourceStr) {
+                const enItem = itemDefsEN ? itemDefsEN[hash] : item;
+                const enName = enItem?.displayProperties?.name;
+                if (enName) {
+                    const canonicalBaseName = enName.replace(/\s*\(Adept\)|\s*\(Harrowed\)|\s*\(Timelost\)|\s*\(Baroque\)|\s*\(Shiny\)/g, '').trim();
+                    if (nameFallbackMap.has(canonicalBaseName)) {
+                        sourceStr = nameFallbackMap.get(canonicalBaseName);
+                    }
+                }
             }
             
             subset[hash] = {
@@ -85,8 +147,14 @@ async function updateManifest() {
     const manifestRes = await fetch(MANIFEST_URL);
     const manifestMeta = await manifestRes.json();
     
-    const dataEN = await fetchLanguageSubset('en', hashes, manifestMeta);
-    const dataDE = await fetchLanguageSubset('de', hashes, manifestMeta);
+    // Fetch EN definitions once at the top level to share with other languages
+    const enDefPath = manifestMeta.Response.jsonWorldComponentContentPaths['en'].DestinyInventoryItemDefinition;
+    console.log("Pre-fetching English Definitions for canonical mapping...");
+    const enItemsRes = await fetch(`${BUNGIE_BASE}${enDefPath}`);
+    const itemDefsEN = await enItemsRes.json();
+
+    const dataEN = await fetchLanguageSubset('en', hashes, manifestMeta, itemDefsEN);
+    const dataDE = await fetchLanguageSubset('de', hashes, manifestMeta, itemDefsEN);
 
     const finalData = {
         en: dataEN,

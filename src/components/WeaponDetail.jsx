@@ -60,7 +60,7 @@ const WeaponDetail = () => {
   const { baseName, hash, rolls: childRolls } = weaponGroup;
   const manifestLangData = destinyData[lang] || {};
   const weaponData = manifestLangData[hash] || {};
-  
+
   const weaponScreenshot = weaponData.screenshot;
   const weaponType = weaponData.itemTypeDisplayName;
   const ammoType = weaponData.equippingBlock?.ammoType;
@@ -78,8 +78,8 @@ const WeaponDetail = () => {
         </div>
       )}
 
-      <button 
-        className="filter-btn" 
+      <button
+        className="filter-btn"
         onClick={() => navigate(`/${lang}`)}
         style={{ marginBottom: '2rem' }}
       >
@@ -88,10 +88,10 @@ const WeaponDetail = () => {
 
       <div className="detail-hero">
         {weaponScreenshot && (
-          <img 
-            src={weaponScreenshot} 
-            alt={baseName} 
-            className="hero-screenshot interactive" 
+          <img
+            src={weaponScreenshot}
+            alt={baseName}
+            className="hero-screenshot interactive"
             onClick={() => setIsImageEnlarged(true)}
             title={lang === 'de' ? "Bild vergrößern" : "Enlarge picture"}
           />
@@ -103,8 +103,8 @@ const WeaponDetail = () => {
             <AmmoTypeLabel ammoType={ammoType} lang={lang} />
           </div>
           <p className="weapon-source-aggregator">
-             {lang === 'de' ? 'Quellen: ' : 'Sources: '} 
-             {weaponGroup.sources?.[lang]?.length > 0 ? weaponGroup.sources[lang].join(', ') : (lang === 'de' ? 'unbekannt' : 'unknown')}
+            {lang === 'de' ? 'Quelle(n): ' : 'Source(s): '}
+            {weaponGroup.sources?.[lang]?.length > 0 ? weaponGroup.sources[lang].join(', ') : (lang === 'de' ? 'unbekannt' : 'unknown')}
           </p>
           {description && <p className="weapon-lore">"{description}"</p>}
         </div>
@@ -118,50 +118,50 @@ const WeaponDetail = () => {
         return (
           <div key={idx} className="detail-rolls-section">
             <h2 className={`roll-title ${rollType}`}>
-               {rollType} God Roll {rollItem.notes ? `(${rollItem.notes})` : ''}
+              {rollType} God Roll {rollItem.notes ? `(${rollItem.notes})` : ''}
             </h2>
             <div className="perks-grid detailed-grid">
               {(() => {
                 const plugs2D = Array.isArray(rollItem.plugs[0]) ? rollItem.plugs : reconstructPerkColumns(rollItem.plugs, manifestLangData);
-                
+
                 return plugs2D.map((plugCol, colIndex) => {
                   const seenPerkNames = new Set();
                   const uniquePlugs = [];
                   plugCol.forEach(plugHash => {
                     const pData = manifestLangData[plugHash] || { name: 'Unknown' };
                     if (!seenPerkNames.has(pData.name)) {
-                       seenPerkNames.add(pData.name);
-                       uniquePlugs.push(plugHash);
+                      seenPerkNames.add(pData.name);
+                      uniquePlugs.push(plugHash);
                     }
                   });
-                  
+
                   return (
                     <div key={colIndex} className="perk-column detailed">
                       {uniquePlugs.map((plugHash, plugIdx) => {
-                      const perkData = manifestLangData[plugHash] || { name: `Unknown`, description: '' };
-                      const isFirst = plugIdx === 0;
-                      return (
-                        <div key={plugHash} className={`perk-detail-card ${isFirst ? 'gold-perk' : ''}`}>
-                          {perkData.icon && (
-                            <div className="perk-icon-wrapper large">
-                              <img src={perkData.icon} alt={perkData.name} className="perk-icon" />
+                        const perkData = manifestLangData[plugHash] || { name: `Unknown`, description: '' };
+                        const isFirst = plugIdx === 0;
+                        return (
+                          <div key={plugHash} className={`perk-detail-card ${isFirst ? 'gold-perk' : ''}`}>
+                            {perkData.icon && (
+                              <div className="perk-icon-wrapper large">
+                                <img src={perkData.icon} alt={perkData.name} className="perk-icon" />
+                              </div>
+                            )}
+                            <div className="perk-text">
+                              <strong>{perkData.name}</strong>
+                              <p>{perkData.description}</p>
                             </div>
-                          )}
-                          <div className="perk-text">
-                            <strong>{perkData.name}</strong>
-                            <p>{perkData.description}</p>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                );
-              })
-            })()}
+                        );
+                      })}
+                    </div>
+                  );
+                })
+              })()}
+            </div>
           </div>
-        </div>
-      );
-    })}
+        );
+      })}
     </div>
   );
 };

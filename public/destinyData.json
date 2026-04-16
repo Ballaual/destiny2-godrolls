@@ -286,7 +286,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Last Wish raid.",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v710.season"
@@ -316,7 +316,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.fusion_rifle",
         "releases.v950.core"
@@ -331,7 +331,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Guardian Games",
       "traitIds": [
         "item.weapon.fusion_rifle",
         "releases.v950.core"
@@ -346,7 +346,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.auto_rifle",
         "releases.v950.core"
@@ -511,7 +511,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v950.core"
@@ -804,7 +804,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Season Pass Reward",
       "traitIds": [
         "item.weapon.sword",
         "releases.v730.season"
@@ -874,7 +874,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Complete Nightfall strike \"Warden of Nothing.\"",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v720.season"
@@ -914,7 +914,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Earned during the seasonal Dawning event.",
       "traitIds": [
         "foundry.veist",
         "item.weapon.linear_fusion_rifle",
@@ -1292,7 +1292,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "The Edge of Fate Campaign",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -1308,7 +1308,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "The Edge of Fate Campaign",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -1324,7 +1324,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "The Edge of Fate Campaign",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -1340,7 +1340,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "The Edge of Fate Campaign",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -1431,7 +1431,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Festival of the Lost",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v400.season"
@@ -1667,7 +1667,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Last Wish raid.",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v710.season"
@@ -1987,7 +1987,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Solstice",
       "traitIds": [
         "foundry.veist",
         "item.weapon.bow",
@@ -2003,7 +2003,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.sniper_rifle",
         "releases.v950.dlc"
@@ -2068,7 +2068,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.glaive",
         "releases.v950.core"
@@ -2139,7 +2139,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -2259,7 +2259,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.sniper_rifle",
         "releases.v950.core"
@@ -2323,7 +2323,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Trait",
       "equippingBlock": null,
-      "source": null,
+      "source": "Unlocked by a special offer.",
       "traitIds": []
     },
     "702001725": {
@@ -2567,7 +2567,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -2582,7 +2582,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -2597,7 +2597,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -2612,7 +2612,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -2737,7 +2737,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Complete Iron Banner matches and earn rank-up packages from Lord Saladin.",
       "traitIds": [
         "item.weapon.sidearm",
         "releases.v530.season"
@@ -2983,7 +2983,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Complete Iron Banner matches and earn rank-up packages from Lord Saladin.",
       "traitIds": [
         "item.weapon.bow",
         "activities.iron_banner",
@@ -3240,7 +3240,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Guardian Games 2025",
       "traitIds": [
         "item.weapon.trace_rifle",
         "releases.v950.core"
@@ -3386,7 +3386,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v950.core"
@@ -4101,7 +4101,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v950.core"
@@ -4227,7 +4227,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.fusion_rifle",
         "releases.v950.core"
@@ -4862,7 +4862,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Flawless Chest in Trials of Osiris",
       "traitIds": [
         "item.weapon.sidearm",
         "releases.v900.core"
@@ -4952,7 +4952,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.grenade_launcher",
@@ -5261,7 +5261,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v910.core"
@@ -5532,7 +5532,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Complete Nightfall strike \"Warden of Nothing.\"",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v720.season"
@@ -5603,7 +5603,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Earned during the seasonal Dawning event.",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.glaive",
@@ -5619,7 +5619,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Last Wish raid.",
       "traitIds": [
         "item.weapon.rocket_launcher",
         "releases.v710.season"
@@ -5679,7 +5679,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Renegades",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v950.dlc"
@@ -6206,7 +6206,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Renegades",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v950.dlc"
@@ -6995,7 +6995,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "The Dawning.",
       "traitIds": [
         "foundry.field_forged",
         "item.weapon.grenade_launcher",
@@ -7409,7 +7409,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Renegades",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v950.dlc"
@@ -7867,7 +7867,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "The Dawning.",
       "traitIds": [
         "item.weapon.sidearm",
         "releases.v950.core"
@@ -7935,7 +7935,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Enhanced Trait",
       "equippingBlock": null,
-      "source": null,
+      "source": "Unlocked by a special offer.",
       "traitIds": []
     },
     "2675361166": {
@@ -8259,7 +8259,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "The Edge of Fate Campaign",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.sword",
@@ -8275,7 +8275,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "The Edge of Fate Campaign",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.sword",
@@ -8291,7 +8291,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "The Edge of Fate Campaign",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.sword",
@@ -8738,7 +8738,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Last Wish raid.",
       "traitIds": [
         "item.weapon.sniper_rifle",
         "releases.v710.season"
@@ -9032,7 +9032,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Solstice",
       "traitIds": [
         "foundry.tex_mechanica",
         "item.weapon.submachinegun",
@@ -9098,7 +9098,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Reclaim",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -9113,7 +9113,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Reclaim",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -9128,7 +9128,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Reclaim",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -9143,7 +9143,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Reclaim",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -10016,7 +10016,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.hand_cannon",
@@ -10546,7 +10546,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Flawless Chest in Trials of Osiris",
       "traitIds": [
         "foundry.suros",
         "item.weapon.machinegun",
@@ -10775,7 +10775,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Festival of the Lost",
       "traitIds": [
         "item.weapon.bow",
         "releases.v910.core"
@@ -11280,7 +11280,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Flawless Chest in Trials of Osiris",
       "traitIds": [
         "item.weapon.scout_rifle",
         "releases.v900.core"
@@ -11313,7 +11313,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Enhanced Trait",
       "equippingBlock": null,
-      "source": null,
+      "source": "Unlocked by a special offer.",
       "traitIds": []
     },
     "3721627275": {
@@ -11525,7 +11525,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.hand_cannon",
@@ -12156,7 +12156,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Solstice",
       "traitIds": [
         "foundry.suros",
         "item.weapon.grenade_launcher",
@@ -12702,7 +12702,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Random Perks: This item cannot be reacquired from Collections.",
       "traitIds": [
         "item.weapon.machinegun",
         "releases.v950.core"
@@ -13102,7 +13102,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Trait",
       "equippingBlock": null,
-      "source": null,
+      "source": "Unlocked by a special offer.",
       "traitIds": []
     }
   },
@@ -13393,7 +13393,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "„Letzter Wunsch“-Raid",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v710.season"
@@ -13423,7 +13423,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.fusion_rifle",
         "releases.v950.core"
@@ -13438,7 +13438,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Hüter-Spiele",
       "traitIds": [
         "item.weapon.fusion_rifle",
         "releases.v950.core"
@@ -13453,7 +13453,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.auto_rifle",
         "releases.v950.core"
@@ -13618,7 +13618,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v950.core"
@@ -13911,7 +13911,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Saisonpass-Belohnung",
       "traitIds": [
         "item.weapon.sword",
         "releases.v730.season"
@@ -13981,7 +13981,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Schließe den Dämmerung-Strike „Wächter des Nichts“ ab.",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v720.season"
@@ -14021,7 +14021,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Verdient durch das saisonale Event „Der Anbruch“.",
       "traitIds": [
         "foundry.veist",
         "item.weapon.linear_fusion_rifle",
@@ -14399,7 +14399,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "„Am Rande des Schicksals“-Kampagne",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -14415,7 +14415,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "„Am Rande des Schicksals“-Kampagne",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -14431,7 +14431,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "„Am Rande des Schicksals“-Kampagne",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -14447,7 +14447,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "„Am Rande des Schicksals“-Kampagne",
       "traitIds": [
         "foundry.omolon",
         "item.weapon.trace_rifle",
@@ -14538,7 +14538,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Festival der Verlorenen",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v400.season"
@@ -14774,7 +14774,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "„Letzter Wunsch“-Raid",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v710.season"
@@ -15094,7 +15094,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Sonnenwende",
       "traitIds": [
         "foundry.veist",
         "item.weapon.bow",
@@ -15110,7 +15110,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.sniper_rifle",
         "releases.v950.dlc"
@@ -15175,7 +15175,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.glaive",
         "releases.v950.core"
@@ -15246,7 +15246,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -15366,7 +15366,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.sniper_rifle",
         "releases.v950.core"
@@ -15430,7 +15430,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Eigenschaft",
       "equippingBlock": null,
-      "source": null,
+      "source": "Durch ein spezielles Angebot freigeschaltet.",
       "traitIds": []
     },
     "702001725": {
@@ -15674,7 +15674,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -15689,7 +15689,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -15704,7 +15704,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -15719,7 +15719,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v950.core"
@@ -15844,7 +15844,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Schließe Eisenbanner-Matches ab und verdiene Rangaufstiegpakete von Lord Saladin.",
       "traitIds": [
         "item.weapon.sidearm",
         "releases.v530.season"
@@ -16090,7 +16090,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Schließe Eisenbanner-Matches ab und verdiene Rangaufstiegpakete von Lord Saladin.",
       "traitIds": [
         "item.weapon.bow",
         "activities.iron_banner",
@@ -16347,7 +16347,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Hüter-Spiele 2025",
       "traitIds": [
         "item.weapon.trace_rifle",
         "releases.v950.core"
@@ -16493,7 +16493,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v950.core"
@@ -17208,7 +17208,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v950.core"
@@ -17334,7 +17334,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.fusion_rifle",
         "releases.v950.core"
@@ -17969,7 +17969,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Makellos-Truhe in den Prüfungen von Osiris",
       "traitIds": [
         "item.weapon.sidearm",
         "releases.v900.core"
@@ -18059,7 +18059,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.grenade_launcher",
@@ -18368,7 +18368,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "item.weapon.bow",
         "releases.v910.core"
@@ -18639,7 +18639,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Schließe den Dämmerung-Strike „Wächter des Nichts“ ab.",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v720.season"
@@ -18710,7 +18710,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Verdient durch das saisonale Event „Der Anbruch“.",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.glaive",
@@ -18726,7 +18726,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "„Letzter Wunsch“-Raid",
       "traitIds": [
         "item.weapon.rocket_launcher",
         "releases.v710.season"
@@ -18786,7 +18786,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Renegades",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v950.dlc"
@@ -19313,7 +19313,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Renegades",
       "traitIds": [
         "item.weapon.pulse_rifle",
         "releases.v950.dlc"
@@ -20102,7 +20102,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Der Anbruch",
       "traitIds": [
         "foundry.field_forged",
         "item.weapon.grenade_launcher",
@@ -20516,7 +20516,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Renegades",
       "traitIds": [
         "item.weapon.hand_cannon",
         "releases.v950.dlc"
@@ -20974,7 +20974,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Der Anbruch",
       "traitIds": [
         "item.weapon.sidearm",
         "releases.v950.core"
@@ -21042,7 +21042,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Verbessertes Attribut",
       "equippingBlock": null,
-      "source": null,
+      "source": "Durch ein spezielles Angebot freigeschaltet.",
       "traitIds": []
     },
     "2675361166": {
@@ -21366,7 +21366,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "„Am Rande des Schicksals“-Kampagne",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.sword",
@@ -21382,7 +21382,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "„Am Rande des Schicksals“-Kampagne",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.sword",
@@ -21398,7 +21398,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "„Am Rande des Schicksals“-Kampagne",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.sword",
@@ -21845,7 +21845,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "„Letzter Wunsch“-Raid",
       "traitIds": [
         "item.weapon.sniper_rifle",
         "releases.v710.season"
@@ -22139,7 +22139,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Sonnenwende",
       "traitIds": [
         "foundry.tex_mechanica",
         "item.weapon.submachinegun",
@@ -22205,7 +22205,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Rückeroberung",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -22220,7 +22220,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Rückeroberung",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -22235,7 +22235,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Rückeroberung",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -22250,7 +22250,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Rückeroberung",
       "traitIds": [
         "item.weapon.grenade_launcher",
         "releases.v910.core"
@@ -23123,7 +23123,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.hand_cannon",
@@ -23653,7 +23653,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Makellos-Truhe in den Prüfungen von Osiris",
       "traitIds": [
         "foundry.suros",
         "item.weapon.machinegun",
@@ -23882,7 +23882,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Festival der Verlorenen",
       "traitIds": [
         "item.weapon.bow",
         "releases.v910.core"
@@ -24387,7 +24387,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Makellos-Truhe in den Prüfungen von Osiris",
       "traitIds": [
         "item.weapon.scout_rifle",
         "releases.v900.core"
@@ -24420,7 +24420,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Verbessertes Attribut",
       "equippingBlock": null,
-      "source": null,
+      "source": "Durch ein spezielles Angebot freigeschaltet.",
       "traitIds": []
     },
     "3721627275": {
@@ -24632,7 +24632,7 @@
       "equippingBlock": {
         "ammoType": 1
       },
-      "source": null,
+      "source": "Events",
       "traitIds": [
         "foundry.hakke",
         "item.weapon.hand_cannon",
@@ -25263,7 +25263,7 @@
       "equippingBlock": {
         "ammoType": 2
       },
-      "source": null,
+      "source": "Sonnenwende",
       "traitIds": [
         "foundry.suros",
         "item.weapon.grenade_launcher",
@@ -25809,7 +25809,7 @@
       "equippingBlock": {
         "ammoType": 3
       },
-      "source": null,
+      "source": "Zufalls-Perks: Dieser Gegenstand kann nicht aus den Sammlungen zurückgewonnen werden.",
       "traitIds": [
         "item.weapon.machinegun",
         "releases.v950.core"
@@ -26209,7 +26209,7 @@
       "screenshot": null,
       "itemTypeDisplayName": "Eigenschaft",
       "equippingBlock": null,
-      "source": null,
+      "source": "Durch ein spezielles Angebot freigeschaltet.",
       "traitIds": []
     }
   }

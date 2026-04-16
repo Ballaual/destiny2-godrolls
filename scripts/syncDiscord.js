@@ -322,11 +322,16 @@ async function runDiscordSync() {
  
                  const isMwDe = lowerNameDe.includes("meisterwerk") || lowerNameDe.includes("masterwork");
                  const isMwEn = lowerNameEn.includes("masterwork") || lowerNameEn.includes("meisterwerk");
+                 const isStockDe = lowerNameDe.includes("stock") || lowerNameDe.includes("schaft");
+                 const isStockEn = lowerNameEn.includes("stock") || lowerNameEn.includes("schaft");
                  const isOrigin = rawType.includes("origin trait");
  
                  if (isOrigin) {
                      slotTypeDe = perkDeData.itemTypeDisplayName; // e.g. "Ursprungsattribut"
                      slotTypeEn = perkEnData.itemTypeDisplayName; // e.g. "Origin Trait"
+                 } else if (isStockDe || isStockEn) {
+                     slotTypeDe = "Schaft";
+                     slotTypeEn = "Stock";
                  } else {
                      if (isMwDe || idx === 4) {
                          slotTypeDe = "Meisterwerk";

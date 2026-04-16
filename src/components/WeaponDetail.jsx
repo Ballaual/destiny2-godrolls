@@ -156,9 +156,12 @@ const WeaponDetail = () => {
                   const lowerName = (firstPlugData.name || "").toLowerCase();
                   const isMw = lowerName.includes("meisterwerk") || lowerName.includes("masterwork");
                   const isOrigin = rawType.includes("origin trait");
+                  const isStock = lowerName.includes("stock") || lowerName.includes("schaft");
 
                   if (isOrigin) {
                     slotName = firstPlugData.itemTypeDisplayName; // Should be "Ursprungsattribut" or "Origin Trait"
+                  } else if (isStock) {
+                    slotName = lang === 'de' ? "Schaft" : "Stock";
                   } else if (isMw || colIndex === 4) {
                     slotName = lang === 'de' ? "Meisterwerk" : "Masterwork";
                   }

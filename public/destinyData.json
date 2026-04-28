@@ -2252,6 +2252,17 @@
       "source": null,
       "traitIds": []
     },
+    "619537267": {
+      "name": "Fanatical Lance",
+      "description": "Rapid final blows cause targets to explode into a pool of radiolarian fluid.\n\nHip firing launches multiple projectiles at once in a slower moving spread pattern. Projectiles detonate on impact.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/dc2f20f7972f1d28b662486421eea27b.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Trait",
+      "rawItemType": "Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
     "622249644": {
       "name": "Masterworked Range",
       "description": "Maximized stats.\n\nApplies additional stats to this weapon equal to the weapon's tier.",
@@ -4126,6 +4137,17 @@
       "screenshot": null,
       "itemTypeDisplayName": "Origin Trait",
       "rawItemType": "Origin Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
+    "1166233619": {
+      "name": "Nano-Assault",
+      "description": "Quicksilver nanites that attach to the wielder charge the blade. [Alternate Weapon Action]  when fully charged to overclock the attached nanites, enhancing the blade's offensive capabilities. Light attacks deal increased damage to targets; fully charged Heavy attacks create a flaming Quicksilver swarm-nado.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/4d9dcce9dd4f037c85dcf3a94a87fe62.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Trait",
+      "rawItemType": "Trait",
       "equippingBlock": null,
       "source": null,
       "traitIds": []
@@ -7112,6 +7134,17 @@
       "source": null,
       "traitIds": []
     },
+    "2171805903": {
+      "name": "Perpetual Loophole",
+      "description": "Deal additional melee damage while protected by an overshield. Defeating targets with melee final blows while the overshield is active will refresh it.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/ad93d01f093c2ab16ee73e164432ae21.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Trait",
+      "rawItemType": "Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
     "2172195298": {
       "name": "Armor-Piercing Rounds",
       "description": "Rounds cause extra damage to combatants' shields and overpenetrate targets. \n  •  Slightly increases range",
@@ -8084,6 +8117,17 @@
         "releases.v610.season"
       ]
     },
+    "2493618399": {
+      "name": "Resurgence Directive IV",
+      "description": "Light attacks generate Sword energy and have the chance to spawn seeking Quicksilver nanites that heal the wielder upon attaching.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/8c0021399fcd8f4d93b7413100a4b8cc.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "",
+      "rawItemType": "",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
     "2495011826": {
       "name": "Ensemble",
       "description": "Substantially improved handling and reload speed when allies are nearby.",
@@ -8091,6 +8135,17 @@
       "screenshot": null,
       "itemTypeDisplayName": "Trait",
       "rawItemType": "Enhanced Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
+    "2523469161": {
+      "name": "Classy Contender",
+      "description": "Final blows with this weapon grant improved class ability energy.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/ea99a5550787bc2196c717e98baff076.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Origin Trait",
+      "rawItemType": "Enhanced Origin Trait",
       "equippingBlock": null,
       "source": null,
       "traitIds": []
@@ -8421,6 +8476,17 @@
         "item.weapon.grenade_launcher",
         "releases.v810.season"
       ]
+    },
+    "2607392828": {
+      "name": "Heart Piercer",
+      "description": "Rounds from this weapon shatter into submunitions on impact. Strong against [Disruption] Overload Champions.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/bab2d41f18974a1742520f999f3ee35f.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Trait",
+      "rawItemType": "Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
     },
     "2610012052": {
       "name": "Golden Tricorn",
@@ -9767,6 +9833,17 @@
       "screenshot": null,
       "itemTypeDisplayName": "Trait",
       "rawItemType": "Enhanced Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
+    "2963428707": {
+      "name": "Transcendent Duelist",
+      "description": "This weapon collects less ammo. Final blows with this weapon accelerate Light and Darkness mastery.\nDeals increased damage while Transcendent; defeating targets lengthens Transcendence.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/cbdab5af9f3db60e6f275925c1bea020.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Trait",
+      "rawItemType": "Trait",
       "equippingBlock": null,
       "source": null,
       "traitIds": []
@@ -13695,6 +13772,17 @@
         "releases.v800.season"
       ]
     },
+    "4152458172": {
+      "name": "Häkke Light Burst Fire",
+      "description": "Fires a stable burst of four lightweight rounds.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/21f4d14934498c38af037784a15f68a1.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Origin Trait",
+      "rawItemType": "Origin Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
     "4164201232": {
       "name": "1000 Yard Stare",
       "description": "You can see everything. You can unsee nothing.",
@@ -16439,6 +16527,17 @@
       "source": null,
       "traitIds": []
     },
+    "619537267": {
+      "name": "Fanatische Lanze",
+      "description": "Schnelle Todesstöße sorgen dafür, dass Ziele explodieren und eine Pfütze aus radiolarischer Flüssigkeit hinterlassen.\n\nBeim Feuern aus der Hüfte werden mehrere Projektile auf einmal abgefeuert, die sich langsamer bewegen und ausbreiten. Projektile explodieren beim Einschlag.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/dc2f20f7972f1d28b662486421eea27b.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Eigenschaft",
+      "rawItemType": "Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
     "622249644": {
       "name": "Meisterwerk Reichweite",
       "description": "Maximale Werte.\n\nVerleiht dieser Waffe zusätzliche Werte, die der Waffenstufe entsprechen.",
@@ -18313,6 +18412,17 @@
       "screenshot": null,
       "itemTypeDisplayName": "Ursprungsattribut",
       "rawItemType": "Origin Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
+    "1166233619": {
+      "name": "Nano-Angriff",
+      "description": "Quecksilber-Naniten, die sich an den Nutzer heften, laden die Klinge auf. [Alternative Waffenaktion] , wenn die Naniten voll aufgeladen sind, um die haftenden Naniten zu überladen. Dadurch wird die Angriffskraft der Klinge erhöht. Leichte Angriffe verursachen mehr Schaden. Voll aufgeladene schwere Angriffe erzeugen einen feurigen Quecksilber-Wirbelnado.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/4d9dcce9dd4f037c85dcf3a94a87fe62.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Eigenschaft",
+      "rawItemType": "Trait",
       "equippingBlock": null,
       "source": null,
       "traitIds": []
@@ -21299,6 +21409,17 @@
       "source": null,
       "traitIds": []
     },
+    "2171805903": {
+      "name": "Dauerschlupfloch",
+      "description": "Füge zusätzlichen Nahkampfschaden zu, während du durch einen Überschild geschützt bist. Das Besiegen von Zielen mit Nahkampf-Todesstößen bei aktivem Überschild frischt den Überschild auf.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/ad93d01f093c2ab16ee73e164432ae21.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Eigenschaft",
+      "rawItemType": "Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
     "2172195298": {
       "name": "Panzerbrechende Geschosse",
       "description": "Geschosse verursachen zusätzlichen Schaden an Schilden von Kämpfern und durchdringen Ziele überdurchschnittlich. \n • Erhöht Reichweite leicht",
@@ -22271,6 +22392,17 @@
         "releases.v610.season"
       ]
     },
+    "2493618399": {
+      "name": "Wiedererstarkungsdirektive IV",
+      "description": "Leichte Angriffe erzeugen Schwertenergie und können Quecksilber-Naniten erzeugen, die den Nutzer heilen, wenn sie an ihm haften bleiben.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/8c0021399fcd8f4d93b7413100a4b8cc.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "",
+      "rawItemType": "",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
     "2495011826": {
       "name": "Ensemble",
       "description": "Erheblich verbesserte Handhabung und Nachladegeschwindigkeit, wenn Verbündete in der Nähe sind.",
@@ -22278,6 +22410,17 @@
       "screenshot": null,
       "itemTypeDisplayName": "Eigenschaft",
       "rawItemType": "Enhanced Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
+    "2523469161": {
+      "name": "Stilvoller Herausforderer",
+      "description": "Todesstöße mit dieser Waffe gewähren mehr Klassenfähigkeiten-Energie.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/ea99a5550787bc2196c717e98baff076.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Ursprungsattribut",
+      "rawItemType": "Enhanced Origin Trait",
       "equippingBlock": null,
       "source": null,
       "traitIds": []
@@ -22608,6 +22751,17 @@
         "item.weapon.grenade_launcher",
         "releases.v810.season"
       ]
+    },
+    "2607392828": {
+      "name": "Herzdorn",
+      "description": "Geschosse aus dieser Waffe zerfallen beim Aufprall in Streumunition. Stark gegen [Störung] Überladungs-Champions.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/bab2d41f18974a1742520f999f3ee35f.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Eigenschaft",
+      "rawItemType": "Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
     },
     "2610012052": {
       "name": "Goldener Dreispitz",
@@ -23954,6 +24108,17 @@
       "screenshot": null,
       "itemTypeDisplayName": "Eigenschaft",
       "rawItemType": "Enhanced Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
+    },
+    "2963428707": {
+      "name": "Transzendenter Duellant",
+      "description": "Diese Waffe sammelt weniger Munition. Todesstöße mit dieser Waffe beschleunigen das Meistern von Licht und Dunkelheit.\nVerursacht erhöhten Schaden, während du Transzendent bist; wenn du Ziele besiegst, verlängert das die Transzendenz.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/cbdab5af9f3db60e6f275925c1bea020.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Eigenschaft",
+      "rawItemType": "Trait",
       "equippingBlock": null,
       "source": null,
       "traitIds": []
@@ -27881,6 +28046,17 @@
         "item.weapon.hand_cannon",
         "releases.v800.season"
       ]
+    },
+    "4152458172": {
+      "name": "Leichte Häkke-Salve",
+      "description": "Feuert eine stabile Salve von vier leichten Geschossen ab.",
+      "icon": "https://www.bungie.net/common/destiny2_content/icons/21f4d14934498c38af037784a15f68a1.png",
+      "screenshot": null,
+      "itemTypeDisplayName": "Ursprungsattribut",
+      "rawItemType": "Origin Trait",
+      "equippingBlock": null,
+      "source": null,
+      "traitIds": []
     },
     "4164201232": {
       "name": "Leerer Blick",

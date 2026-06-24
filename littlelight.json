@@ -1,0 +1,68 @@
+{
+    "description": "Bungie.net: Ballaual#8995 | Discord: ballaual",
+    "name": "Ballaual's God Rolls Collection",
+    "data": [
+        {
+            "description": "double perk fast vent style burst sniper, no ammo gen perk though",
+            "hash": 4062069077,
+            "name": "Conspiracy Honed - PVE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    1454612425,
+                    807993149
+                ],
+                [
+                    3418165135,
+                    1546637391
+                ],
+                [
+                    3744057135,
+                    3078487919
+                ],
+                [
+                    2957461671,
+                    1164078247
+                ]
+            ],
+            "tags": [
+                "GodPVE",
+                "PVE"
+            ]
+        },
+        {
+            "description": "double perk fast vent style burst sniper, no ammo gen perk though",
+            "hash": 4062069077,
+            "name": "Conspiracy Honed - PVE God Roll (alternative)",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    226831738,
+                    1092016998
+                ],
+                [
+                    3418165135,
+                    1546637391
+                ],
+                [
+                    3744057135,
+                    3078487919
+                ],
+                [
+                    2957461671,
+                    1164078247
+                ]
+            ],
+            "tags": [
+                "GodPVE",
+                "PVE"
+            ]
+        }
+    ]
+}

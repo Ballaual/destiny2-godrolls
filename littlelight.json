@@ -71,9 +71,9 @@
             ]
         },
         {
-            "description": "",
+            "description": "Crafted version",
             "hash": 1992309064,
-            "name": "Reckless Oracle - PvE God Roll (crafted)",
+            "name": "Reckless Oracle - PvE God Roll",
             "plugs": [
                 [
                     1124871858,
@@ -105,9 +105,9 @@
             ]
         },
         {
-            "description": "every relevant void perk and Chaos to boot, great all around",
+            "description": "Pantheon version - every relevant void perk and Chaos to boot, great all around",
             "hash": 4158265643,
-            "name": "Reckless Oracle - PvE God Roll (Pantheon)",
+            "name": "Reckless Oracle - PvE God Roll",
             "plugs": [
                 [
                     1124871858,

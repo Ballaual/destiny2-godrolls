@@ -1,0 +1,116 @@
+{
+    "description": "Most rolls are based of Aegis Endgame Analysis Spreadsheet:\nhttps://docs.google.com/spreadsheets/d/1JM-0SlxVDAi-C6rGVlLxa-J1WGewEeL8Qvq4htWZHhY/edit?usp=sharing\nBungie.net: Ballaual#8995 | Discord: ballaual",
+    "name": "Ballaual's God Rolls Collection - Traces",
+    "data": [
+        {
+            "description": "probably as good as it gets for the kinetic slot, perks + origin excellent",
+            "hash": 3462679024,
+            "name": "Unsworn - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    3839493627,
+                    2680121939
+                ],
+                [
+                    2840833776,
+                    3700496672,
+                    3244229373,
+                    960997401,
+                    3684445958,
+                    1888882410
+                ],
+                [
+                    1817983009,
+                    3640170453,
+                    222783511,
+                    4198902903,
+                    102912326,
+                    831391274
+                ],
+                [
+                    3057611278,
+                    1298135794
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "StL + utility/splash options, great origin trait for low-tier content",
+            "hash": 1886840007,
+            "name": "Chronophage - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    3839493627,
+                    2680121939
+                ],
+                [
+                    2840833776,
+                    3700496672,
+                    2541826827,
+                    776531651
+                ],
+                [
+                    1926441324,
+                    2048641572,
+                    1906147653,
+                    3523296417,
+                    2799030358,
+                    2109543898
+                ],
+                [
+                    734193227,
+                    253121539
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "StL + Chain best overall trace roll, also FTTC + TL for \"damage\"",
+            "hash": 2386208942,
+            "name": "Keraunios - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    3839493627,
+                    2680121939
+                ],
+                [
+                    2840833776,
+                    3700496672,
+                    848860060,
+                    1354429876
+                ],
+                [
+                    598607952,
+                    2396489472,
+                    2633604463,
+                    3218042543,
+                    222783511,
+                    4198902903
+                ],
+                [
+                    2523469161,
+                    1702976605
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        }
+    ]
+}

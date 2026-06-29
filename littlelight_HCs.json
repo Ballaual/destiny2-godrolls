@@ -1,0 +1,188 @@
+{
+    "description": "Most rolls are based of Aegis Endgame Analysis Spreadsheet:\nhttps://docs.google.com/spreadsheets/d/1JM-0SlxVDAi-C6rGVlLxa-J1WGewEeL8Qvq4htWZHhY/edit?usp=sharing\nBungie.net: Ballaual#8995 | Discord: ballaual",
+    "name": "Ballaual's God Rolls Collection - HCs",
+    "data": [
+        {
+            "description": "great frame, excellent perks, amazing origin",
+            "hash": 120706239,
+            "name": "Word of Crota - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    1709045111,
+                    3230963543,
+                    550838496,
+                    1431678320
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    169755979,
+                    2848615171
+                ],
+                [
+                    1926441324,
+                    2048641572
+                ],
+                [
+                    2460489707,
+                    1156201379
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "great frame, excellent perks, amazing origin",
+            "hash": 3926103986,
+            "name": "Word of Crota (Adept) - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    1709045111,
+                    3230963543,
+                    550838496,
+                    1431678320
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    169755979,
+                    2848615171
+                ],
+                [
+                    1926441324,
+                    2048641572
+                ],
+                [
+                    2460489707,
+                    1156201379
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "great void combo and other alternative perks on great frame",
+            "hash": 2041617874,
+            "name": "IRONWOOD 03 - PvE God Roll",
+            "plugs": [
+                [
+                    2371713880,
+                    1300023272
+                ],
+                [
+                    1709045111,
+                    3230963543,
+                    550838496,
+                    1431678320
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    1767911158,
+                    3182497402,
+                    1906147653,
+                    3523296417
+                ],
+                [
+                    1926441324,
+                    2048641572,
+                    781192741,
+                    3708227201,
+                    2963273944,
+                    3081867624
+                ],
+                [
+                    843406310,
+                    3018257738
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "great frame, splash + damage, solid origin",
+            "hash": 3281285075,
+            "name": "Posterity - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    1709045111,
+                    3230963543,
+                    550838496,
+                    1431678320
+                ],
+                [
+                    1720528630,
+                    2173046394
+                ],
+                [
+                    3007133316,
+                    4104185692,
+                    1545231802,
+                    3201496230,
+                    64866129,
+                    3038247973
+                ],
+                [
+                    1501421141,
+                    766321425
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "better version of Solemn Remembrance with Crystalline access",
+            "hash": 1872906663,
+            "name": "Modified B-7 Pistol - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    4273542183,
+                    1946186791,
+                    226831738,
+                    1092016998
+                ],
+                [
+                    1183436451,
+                    3824105627,
+                    2617553311,
+                    1955165503,
+                    2938480696,
+                    247725512
+                ],
+                [
+                    1171887445,
+                    124408337,
+                    2078520142,
+                    2922950962
+                ],
+                [
+                    2671305723,
+                    3713579091
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        }
+    ]
+}

@@ -3,7 +3,7 @@
     "name": "Ballaual's God Rolls Collection",
     "data": [
         {
-            "description": "S-Tier | Stasis\ndouble perk fast vent style burst sniper, no ammo gen perk though",
+            "description": "double perk fast vent style burst sniper, no ammo gen perk though",
             "hash": 4062069077,
             "name": "Conspiracy Honed - PvE God Roll",
             "plugs": [
@@ -35,7 +35,7 @@
             ]
         },
         {
-            "description": "S-Tier | Solar\non-demand survivability on any class, Benevolence synergy",
+            "description": "on-demand survivability on any class, Benevolence synergy",
             "hash": 1801007332,
             "name": "No Hesitation - PvE God Roll",
             "plugs": [
@@ -71,9 +71,9 @@
             ]
         },
         {
-            "description": "S-Tier | Void",
+            "description": "",
             "hash": 1992309064,
-            "name": "Reckless Oracle - PvE God Roll (pre MoT - S25)",
+            "name": "Reckless Oracle - PvE God Roll (crafted)",
             "plugs": [
                 [
                     1124871858,
@@ -105,9 +105,9 @@
             ]
         },
         {
-            "description": "S-Tier | Void\nevery relevant void perk and Chaos to boot, great all around",
+            "description": "every relevant void perk and Chaos to boot, great all around",
             "hash": 4158265643,
-            "name": "Reckless Oracle - PvE God Roll (MoT - S28)",
+            "name": "Reckless Oracle - PvE God Roll (Pantheon)",
             "plugs": [
                 [
                     1124871858,
@@ -145,7 +145,7 @@
             ]
         },
         {
-            "description": "S-Tier | Stasis\nFrost Armor not as good as Restoration, but good perk spread",
+            "description": "Frost Armor not as good as Restoration, but good perk spread",
             "hash": 1850748385,
             "name": "DECATUR 02 - PvE God Roll",
             "plugs": [
@@ -183,9 +183,9 @@
             ]
         },
         {
-            "description": "S-Tier | Arc\nStL + Chain best overall trace roll, also FTTC + TL for \"damage\"",
+            "description": "StL + Chain best overall trace roll, also FTTC + TL for \"damage\"",
             "hash": 2386208942,
-            "name": "Keraunios - PvE God Roll (S28)",
+            "name": "Keraunios - PvE God Roll",
             "plugs": [
                 [
                     1124871858,
@@ -219,7 +219,7 @@
             ]
         },
         {
-            "description": "S-Tier | Void\nStL + utility/splash options, great origin trait for low-tier content",
+            "description": "StL + utility/splash options, great origin trait for low-tier content",
             "hash": 1886840007,
             "name": "Chronophage - PvE God Roll",
             "plugs": [
@@ -255,7 +255,7 @@
             ]
         },
         {
-            "description": "S-Tier | Strand\nprobably as good as it gets for the kinetic slot, perks + origin excellent",
+            "description": "probably as good as it gets for the kinetic slot, perks + origin excellent",
             "hash": 3462679024,
             "name": "Unsworn - PvE God Roll",
             "plugs": [
@@ -291,7 +291,7 @@
             ]
         },
         {
-            "description": "S-Tier | Void\nbest light attack neutral + okay damage with bumped impact",
+            "description": "best light attack neutral + okay damage with bumped impact",
             "hash": 1085743380,
             "name": "Sullen Claw - PvE God Roll",
             "plugs": [
@@ -333,7 +333,7 @@
             ]
         },
         {
-            "description": "S-Tier |  Solar\nexcellent perks for 12P and roam",
+            "description": "excellent perks for 12P and roam",
             "hash": 1168625549,
             "name": "IKELOS_SG_v1.0.3 - PvE God Roll",
             "plugs": [
@@ -371,9 +371,9 @@
             ]
         },
         {
-            "description": "S-Tier | Kinetic\nBiS kinetic pellet dump and 1 mag melee-based damage",
+            "description": "Pantheon version - BiS kinetic pellet dump and 1 mag melee-based damage",
             "hash": 1523151869,
-            "name": "Threat Level - PvE God Roll (S28)",
+            "name": "Threat Level - PvE God Roll",
             "plugs": [
                 [
                     2371713880,
@@ -409,9 +409,9 @@
             ]
         },
         {
-            "description": "S-Tier | Kinetic\nBiS shotgun for most common shotgun use case",
+            "description": "BiS shotgun for most common shotgun use case",
             "hash": 4108648762,
-            "name": "Perfect Paradox - PvE God Roll (S28)",
+            "name": "Perfect Paradox - PvE God Roll",
             "plugs": [
                 [
                     2371713880,
@@ -447,9 +447,9 @@
             ]
         },
         {
-            "description": "S-Tier | Kinectic\nhighest burst shotgun in the game",
+            "description": "highest burst shotgun in the game",
             "hash": 4248569242,
-            "name": "Heritage - PvE God Roll (S28)",
+            "name": "Heritage - PvE God Roll",
             "plugs": [
                 [
                     1124871858,
@@ -485,7 +485,7 @@
             ]
         },
         {
-            "description": "S-Tier | Void\nsolid origin and straightforward QoL perks, great shield duration",
+            "description": "S-Tier\nsolid origin and straightforward QoL perks, great shield duration",
             "hash": 2595497736,
             "name": "The Enigma - PvE God Roll",
             "plugs": [
@@ -523,9 +523,9 @@
             ]
         },
         {
-            "description": "S-Tier | Kinetic\none of the highest utility primaries in high QoL form",
+            "description": "MoT version - one of the highest utility primaries in high QoL form",
             "hash": 3026836571,
-            "name": "Multimach CCX - PvE God Roll (MoT - S28)",
+            "name": "Multimach CCX - PvE God Roll",
             "plugs": [
                 [
                     1124871858,
@@ -563,9 +563,9 @@
             ]
         },
         {
-            "description": "S-Tier | Kinectic\none of the highest utility primaries in high QoL form",
+            "description": "pre MoT version - one of the highest utility primaries in high QoL form",
             "hash": 3211624072,
-            "name": "Multimach CCX - PvE God Roll (pre MoT - S23)",
+            "name": "Multimach CCX - PvE God Roll",
             "plugs": [
                 [
                     1124871858,
@@ -589,6 +589,488 @@
                 ],
                 [
                     3989629871
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "BiS for LP for now",
+            "hash": 2462965802,
+            "name": "Uncivil Discourse - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    1454612425,
+                    807993149,
+                    226831738,
+                    1092016998
+                ],
+                [
+                    3291427296,
+                    1421772400,
+                    2039482529,
+                    3932949589
+                ],
+                [
+                    332733060,
+                    555281244,
+                    2799030358,
+                    2109543898
+                ],
+                [
+                    2671305723,
+                    3713579091
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "Pantheon version - every relevant void perk and Chaos to boot, great all around",
+            "hash": 1802315656,
+            "name": "Reckless Oracle - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774,
+                    3048246338,
+                    839105230
+                ],
+                [
+                    1709045111,
+                    3230963543,
+                    550838496,
+                    1431678320
+                ],
+                [
+                    1926441324,
+                    2048641572,
+                    1767911158,
+                    3182497402,
+                    2613226185,
+                    4019266109
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    1817983009,
+                    3640170453,
+                    2904194311,
+                    1134488199
+                ],
+                [
+                    2407733996,
+                    642688932
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "first of its kind; powerful archetype with mediocre 1st column",
+            "hash": 593808239,
+            "name": "Refurbished A499 - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    1709045111,
+                    3230963543
+                ],
+                [
+                    4116820839,
+                    957782887,
+                    2717805783,
+                    588594999,
+                    3914874605,
+                    2289534249
+                ],
+                [
+                    3192447905,
+                    3764420437
+                ],
+                [
+                    1847323754,
+                    2697390518
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "worse reload perks than Mint but still usable",
+            "hash": 135971347,
+            "name": "Psi Aeterna IV - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810,
+                    373417387,
+                    1478423395
+                ],
+                [
+                    1890997540,
+                    2420895100,
+                    1783397184,
+                    106909392
+                ],
+                [
+                    511499160,
+                    1115162408,
+                    3696140595,
+                    1017229899,
+                    2785334058,
+                    684456054
+                ],
+                [
+                    496047945,
+                    1089671869,
+                    859780267,
+                    4049631843,
+                    717070634,
+                    3966416502
+                ],
+                [
+                    2671305723,
+                    3713579091
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "better perks than Psi for roam",
+            "hash": 1361871430,
+            "name": "Veillantif-D - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810,
+                    373417387,
+                    1478423395
+                ],
+                [
+                    1890997540,
+                    2420895100,
+                    1783397184,
+                    106909392
+                ],
+                [
+                    3291427296,
+                    1421772400,
+                    4223976499,
+                    3017780555,
+                    3696140595,
+                    1017229899
+                ],
+                [
+                    2675184851,
+                    4293542123,
+                    2799030358,
+                    2109543898,
+                    3581929919,
+                    2890807135
+                ],
+                [
+                    250902314,
+                    1607056502
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "better perks than Psi for roam",
+            "hash": 406384293,
+            "name": "Veillantif-D - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810,
+                    373417387,
+                    1478423395
+                ],
+                [
+                    1890997540,
+                    2420895100,
+                    1783397184,
+                    106909392
+                ],
+                [
+                    3291427296,
+                    1421772400,
+                    4223976499,
+                    3017780555,
+                    3696140595,
+                    1017229899
+                ],
+                [
+                    2675184851,
+                    4293542123,
+                    2799030358,
+                    2109543898,
+                    3581929919,
+                    2890807135
+                ],
+                [
+                    250902314,
+                    1607056502
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "excellent ammo gen + roam + damage perks",
+            "hash": 1715391576,
+            "name": "Mint Retrograde - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810,
+                    373417387,
+                    1478423395
+                ],
+                [
+                    1890997540,
+                    2420895100,
+                    1783397184,
+                    106909392
+                ],
+                [
+                    2308090567,
+                    2869569095,
+                    1135494563,
+                    2859149211,
+                    102912326,
+                    831391274
+                ],
+                [
+                    2963273944,
+                    3081867624,
+                    3007133316,
+                    4104185692,
+                    331667533,
+                    3751912585
+                ],
+                [
+                    2671305723,
+                    3713579091
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "double damage options, insane origin, Bipod swap option",
+            "hash": 3623686757,
+            "name": "Hezen Vengeance (Timelost) - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    2091001077,
+                    1275731761,
+                    2613226185,
+                    4019266109
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    3192447905,
+                    3764420437,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    716643564,
+                    2589407652
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "solid origin and great neutral perks",
+            "hash": 3605603507,
+            "name": "Pro Memoria - PvE God Roll",
+            "plugs": [
+                [
+                    3048246338,
+                    839105230,
+                    1124871858,
+                    1840239774
+                ],
+                [
+                    1890997540,
+                    2420895100
+                ],
+                [
+                    1906147653,
+                    3523296417,
+                    461595545,
+                    1523832109,
+                    3244229373,
+                    960997401
+                ],
+                [
+                    2799030358,
+                    2109543898,
+                    3744057135,
+                    3078487919,
+                    2260261934,
+                    2305480722
+                ],
+                [
+                    3223868800,
+                    1988485648
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "best elemental perk combo, some other utility options as well",
+            "hash": 924095500,
+            "name": "Lotus-Eater - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810,
+                    373417387,
+                    1478423395
+                ],
+                [
+                    1709045111,
+                    3230963543
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    1767911158,
+                    3182497402,
+                    3291427296,
+                    1421772400
+                ],
+                [
+                    1926441324,
+                    2048641572,
+                    2904194311,
+                    1134488199,
+                    781192741,
+                    3708227201
+                ],
+                [
+                    1621842933,
+                    3846229553
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "best elemental perk combo, some other utility options as well",
+            "hash": 837298567,
+            "name": "Lotus-Eater - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810,
+                    373417387,
+                    1478423395
+                ],
+                [
+                    1709045111,
+                    3230963543
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    1767911158,
+                    3182497402,
+                    3291427296,
+                    1421772400
+                ],
+                [
+                    1926441324,
+                    2048641572,
+                    2904194311,
+                    1134488199,
+                    781192741,
+                    3708227201
+                ],
+                [
+                    1621842933,
+                    3846229553
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "excellent perks all around with solid origin",
+            "hash": 4049127142,
+            "name": "Returned Memory - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810,
+                    373417387,
+                    1478423395
+                ],
+                [
+                    1783397184,
+                    106909392,
+                    3781548872,
+                    1380253176,
+                    1709045111,
+                    3230963543
+                ],
+                [
+                    4223976499,
+                    3017780555,
+                    3442762221,
+                    1556840489,
+                    4096144819,
+                    2360347339
+                ],
+                [
+                    2675184851,
+                    4293542123,
+                    1545231802,
+                    3201496230,
+                    2799030358,
+                    2109543898
+                ],
+                [
+                    483923727,
+                    3911709647
                 ]
             ],
             "tags": [

@@ -1,0 +1,196 @@
+{
+    "description": "Most rolls are based of Aegis Endgame Analysis Spreadsheet:\nhttps://docs.google.com/spreadsheets/d/1JM-0SlxVDAi-C6rGVlLxa-J1WGewEeL8Qvq4htWZHhY/edit?usp=sharing\nBungie.net: Ballaual#8995 | Discord: ballaual\n",
+    "name": "Ballaual's God Rolls Collection - Autos",
+    "data": [
+        {
+            "description": "on-demand survivability on any class, Benevolence synergy",
+            "hash": 1801007332,
+            "name": "No Hesitation - PvE God Roll",
+            "plugs": [
+                [
+                    1871180748,
+                    202670084
+                ],
+                [
+                    3267421167,
+                    3142289711
+                ],
+                [
+                    4063561849,
+                    2980589453,
+                    3581929919,
+                    2890807135
+                ],
+                [
+                    1817983009,
+                    3640170453,
+                    984655331,
+                    243981275,
+                    2675184851,
+                    4293542123
+                ],
+                [
+                    3223868800,
+                    1988485648
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "Frost Armor not as good as Restoration, but good perk spread",
+            "hash": 1850748385,
+            "name": "DECATUR 02 - PvE God Roll",
+            "plugs": [
+                [
+                    1871180748,
+                    202670084
+                ],
+                [
+                    3267421167,
+                    3142289711
+                ],
+                [
+                    4063561849,
+                    2980589453,
+                    984655331,
+                    243981275,
+                    2078520142,
+                    2922950962
+                ],
+                [
+                    4070834277,
+                    692399809,
+                    2963273944,
+                    3081867624,
+                    1545231802,
+                    3201496230
+                ],
+                [
+                    843406310,
+                    3018257738
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "Pantheon version - every relevant void perk and Chaos to boot, great all around",
+            "hash": 1802315656,
+            "name": "Reckless Oracle - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774,
+                    3048246338,
+                    839105230
+                ],
+                [
+                    1709045111,
+                    3230963543,
+                    550838496,
+                    1431678320
+                ],
+                [
+                    1926441324,
+                    2048641572,
+                    1767911158,
+                    3182497402,
+                    2613226185,
+                    4019266109
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    1817983009,
+                    3640170453,
+                    2904194311,
+                    1134488199
+                ],
+                [
+                    2407733996,
+                    642688932
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "Crafted version",
+            "hash": 1992309064,
+            "name": "Reckless Oracle - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774,
+                    3048246338,
+                    839105230
+                ],
+                [
+                    1709045111,
+                    3230963543,
+                    1890997540,
+                    2420895100
+                ],
+                [
+                    1926441324,
+                    2048641572
+                ],
+                [
+                    2541826827,
+                    776531651
+                ],
+                [
+                    988031486,
+                    511914882
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "Pantheon version - every relevant void perk and Chaos to boot, great all around",
+            "hash": 4158265643,
+            "name": "Reckless Oracle - PvE God Roll",
+            "plugs": [
+                [
+                    1124871858,
+                    1840239774,
+                    3048246338,
+                    839105230
+                ],
+                [
+                    1709045111,
+                    3230963543
+                ],
+                [
+                    1926441324,
+                    2048641572,
+                    1767911158,
+                    3182497402,
+                    2613226185,
+                    4019266109
+                ],
+                [
+                    2541826827,
+                    776531651,
+                    1817983009,
+                    3640170453,
+                    2904194311,
+                    1134488199
+                ],
+                [
+                    2407733996,
+                    642688932
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        }
+    ]
+}

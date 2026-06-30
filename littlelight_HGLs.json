@@ -1,0 +1,266 @@
+{
+    "description": "Most rolls are based of Aegis Endgame Analysis Spreadsheet:\nhttps://docs.google.com/spreadsheets/d/1JM-0SlxVDAi-C6rGVlLxa-J1WGewEeL8Qvq4htWZHhY/edit?usp=sharing\nBungie.net: Ballaual#8995 | Discord: ballaual",
+    "name": "Ballaual's God Rolls Collection - HGLs",
+    "data": [
+        {
+            "description": "almost every possible BiS perk on a heavy GL, origin decent too",
+            "hash": 2452936817,
+            "name": "VS Chill Inhibitor - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    409713597,
+                    3301904089
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    331667533,
+                    3751912585,
+                    344235611,
+                    2978966579
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    496047945,
+                    1089671869,
+                    781192741,
+                    3708227201
+                ],
+                [
+                    4232410959,
+                    4139916815
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "has sticky + EL access, also Cascade",
+            "hash": 3736001863,
+            "name": "Edge Transit - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    409713597,
+                    3301904089,
+                    3061646252,
+                    3373736292
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    331667533,
+                    3751912585,
+                    598607952,
+                    2396489472
+                ],
+                [
+                    496047945,
+                    1089671869,
+                    2275087323,
+                    3194351027,
+                    3744057135,
+                    3078487919
+                ],
+                [
+                    2544048574,
+                    2489430594
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "best non-Cascade + damage perk rapid HGL option",
+            "hash": 3177074192,
+            "name": "The Ever-Present - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    409713597,
+                    3301904089,
+                    3156458303,
+                    332133599
+                ],
+                [
+                    2817499044,
+                    3987942396
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    3744057135,
+                    3078487919,
+                    496047945,
+                    1089671869
+                ],
+                [
+                    943022827,
+                    2597494435
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "solid overall dump GL, not really missing anything",
+            "hash": 2972949637,
+            "name": "Koraxis's Distress - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    409713597,
+                    3301904089,
+                    3156458303,
+                    332133599
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    598607952,
+                    2396489472
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    1817983009,
+                    3640170453,
+                    781192741,
+                    3708227201
+                ],
+                [
+                    2600715579,
+                    3186078099
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "solid overall dump GL, not really missing anything",
+            "hash": 495442100,
+            "name": "Koraxis's Distress (Adept) - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    409713597,
+                    3301904089,
+                    3156458303,
+                    3373736292
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    598607952,
+                    2396489472
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    1817983009,
+                    3640170453,
+                    781192741,
+                    3708227201
+                ],
+                [
+                    2600715579,
+                    3186078099
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "free exhaust origin + solid damage perks + good archetype",
+            "hash": 4146673634,
+            "name": "Outrageous Fortune - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    409713597,
+                    3301904089
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    2675184851,
+                    4293542123
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    2275087323,
+                    3194351027,
+                    598607952,
+                    2396489472
+                ],
+                [
+                    2223800157,
+                    3454102905
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "great staple perk pool, alt perks for add clear",
+            "hash": 3482299617,
+            "name": "Love and Death - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    331667533,
+                    3751912585,
+                    4096144819,
+                    2360347339
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    496047945,
+                    1089671869,
+                    598607952,
+                    2396489472
+                ],
+                [
+                    3776798032,
+                    993575936
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        }
+    ]
+}

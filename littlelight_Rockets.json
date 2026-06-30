@@ -1,0 +1,400 @@
+{
+    "description": "Most rolls are based of Aegis Endgame Analysis Spreadsheet:\nhttps://docs.google.com/spreadsheets/d/1JM-0SlxVDAi-C6rGVlLxa-J1WGewEeL8Qvq4htWZHhY/edit?usp=sharing\nBungie.net: Ballaual#8995 | Discord: ballaual",
+    "name": "Ballaual's God Rolls Collection - Rockets",
+    "data": [
+        {
+            "description": "double damage options, insane origin, Bipod swap option",
+            "hash": 2265407516,
+            "name": "Hezen Vengeance - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    2091001077,
+                    1275731761,
+                    2613226185,
+                    4019266109
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    3192447905,
+                    3764420437,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    716643564,
+                    2589407652
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "double damage options, insane origin, Bipod swap option",
+            "hash": 3623686757,
+            "name": "Hezen Vengeance (Timelost) - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    2817499044,
+                    3987942396,
+                    2091001077,
+                    1275731761,
+                    2613226185,
+                    4019266109
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    3192447905,
+                    3764420437,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    716643564,
+                    2589407652
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "Envious + decent perks + Accelerated Assault + good frame",
+            "hash": 2511482352,
+            "name": "Cynosure - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    2817499044,
+                    3987942396
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    3744057135,
+                    3078487919,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    1847323754,
+                    2697390518
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "essentially identical to Cynosure",
+            "hash": 3960301269,
+            "name": "The Hothead - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    2817499044,
+                    3987942396
+                ],
+                [
+                    496047945,
+                    1089671869,
+                    3744057135,
+                    3078487919,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    1847323754,
+                    2697390518
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "missing Envious but great otherwise as a burst specialist",
+            "hash": 1090936013,
+            "name": "The When and Where - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    3563868667,
+                    2284787283,
+                    461595545,
+                    1523832109,
+                    2682205016,
+                    3643424744
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    496047945,
+                    1089671869,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    943022827,
+                    2597494435
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "basically The When and Where with worse origin",
+            "hash": 2846261712,
+            "name": "Crux Celeritas IV - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    461595545,
+                    1523832109,
+                    3563868667,
+                    2284787283
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    496047945,
+                    1089671869,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    501821599,
+                    1050127423
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "basically The When and Where with worse origin",
+            "hash": 391069235,
+            "name": "Crux Celeritas IV - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    461595545,
+                    1523832109,
+                    3563868667,
+                    2284787283
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    496047945,
+                    1089671869,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    501821599,
+                    1050127423
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "good perks but single dump is awkward",
+            "hash": 412265080,
+            "name": "Bellowing Giant - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    1167468626,
+                    3927722942
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    177189259,
+                    113508675,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    2034764268,
+                    2327629476
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "good perks but single dump is awkward",
+            "hash": 1889005379,
+            "name": "Bellowing Giant - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    1167468626,
+                    3927722942
+                ],
+                [
+                    3192447905,
+                    3764420437,
+                    177189259,
+                    113508675,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    2034764268,
+                    2327629476
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "true double damage perks, need to find a way to dump though",
+            "hash": 2881109029,
+            "name": "Roar of the Bear - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    2275087323,
+                    3194351027,
+                    461595545,
+                    1523832109
+                ],
+                [
+                    177189259,
+                    113508675,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    1831023215,
+                    3989629871
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        },
+        {
+            "description": "double damage with Cluster, just worse origin than Hezen",
+            "hash": 1851777734,
+            "name": "Apex Predator - PvE God Roll",
+            "plugs": [
+                [
+                    3250572790,
+                    3525010810
+                ],
+                [
+                    274905539,
+                    3796465595
+                ],
+                [
+                    461595545,
+                    1523832109,
+                    2091001077,
+                    1275731761,
+                    598607952,
+                    2396489472
+                ],
+                [
+                    3744057135,
+                    3078487919,
+                    177189259,
+                    113508675,
+                    2282937672,
+                    1439600632
+                ],
+                [
+                    1513240263,
+                    1489048135
+                ]
+            ],
+            "tags": [
+                "GodPVE"
+            ]
+        }
+    ]
+}
